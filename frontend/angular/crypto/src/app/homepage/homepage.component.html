@@ -1,0 +1,129 @@
+<app-navbar></app-navbar>
+    <div class="container-fluid" class="bg">
+        <div class="bg-content">
+            <h1>Get ahead in the crypto game.</h1>
+            <h3>Trade with our platform.</h3><br>
+            <button class="logingbutton" routerLink="{{authService.isLoggedIn() ? '/trading' : '/registration' }}">Get Started</button>
+        </div>
+    </div>
+
+
+    <!--Cards section-->
+
+        <section class="card-section">
+          <div class="container">
+            <h2 class="section-title">Why Choose Us?</h2>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="card">
+                  <div class="card-icon">
+                    <i class="fas fa-shield-alt"></i>
+                  </div>
+                  <div class="card-body">
+                    <h3 class="card-title">Secure and Trusted</h3>
+                    <p class="card-text">We take security seriously and have implemented the latest measures to ensure the safety of your funds and information.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card">
+                  <div class="card-icon">
+                    <i class="fas fa-credit-card"></i>
+                  </div>
+                  <div class="card-body">
+                    <h3 class="card-title">Easy and Fast Transactions</h3>
+                    <p class="card-text">Our platform offers quick and easy transactions so you can buy and sell your favorite cryptocurrencies in no time.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card">
+                  <div class="card-icon">
+                    <i class="fas fa-headset"></i>
+                  </div>
+                  <div class="card-body">
+                    <h3 class="card-title">24/7 Support</h3>
+                    <p class="card-text">Our dedicated support team is available 24/7 to assist you with any questions or concerns you may have.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+
+        <!--Stats-->
+
+        <section class="stats-section">
+          <div class="stats-wrapper">
+            <div class="stats-stat">
+              <div class="stats-number">$145B</div>
+              <div class="stats-description">Quarterly volume traded</div>
+            </div>
+            <div class="stats-stat">
+              <div class="stats-number">100+</div>
+              <div class="stats-description">Countries supported</div>
+            </div>
+            <div class="stats-stat">
+              <div class="stats-number">110M+</div>
+              <div class="stats-description">Verified users</div>
+            </div>
+          </div>
+        </section>
+
+
+
+
+  <!--Security and privacy section-->
+
+  <section class="security-privacy">
+    <div class="security-container">
+      <div class="row align-items-center">
+        <div class="column-left">
+          <h2>Security and Privacy</h2>
+          <p class="lead">We take your security and privacy seriously. We know that your personal and financial information is important to you, and we work hard to protect it.</p>
+          <p>We use the latest encryption technology to ensure that your data is protected both at rest and in transit. Our platform features multi-factor authentication to prevent unauthorized access, and our systems are constantly monitored for potential security threats.</p>
+          
+          <div class="call-to-action">
+            <h2>Start Trading Today</h2>
+            <p>Join our platform and start building your portfolio now.</p>
+            <button routerLink="{{authService.isLoggedIn() ? '/trading' : '/registration' }}" class="cta-button" >Get Started</button>
+          </div>
+        </div>
+
+    <div class="column-right">
+      <div class="security-image-container">
+        <img src="https://plus.unsplash.com/premium_photo-1675277154674-253f48327a9a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=627&q=80" alt="Security Image">
+    </div>
+    </div>
+  </div>
+</div>
+</section>
+  
+  
+
+<div class="crypto-table-container">
+  <table class="crypto-table">
+    <thead>
+      <tr>
+        <th>Cryptocurrency</th>
+        <th>Value (USDT)</th>
+        <th>Trade</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let crypto of cryptos">
+        <td>
+          <div class="crypto-name">{{ crypto.crypto_name }}</div>
+        </td>
+        <td class="crypto-value">{{ crypto.value_usdt }} US</td>
+        <td>
+          <button routerLink="/trading" class="trade-button">Trade</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<app-footer></app-footer>

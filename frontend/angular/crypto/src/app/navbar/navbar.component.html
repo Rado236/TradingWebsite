@@ -1,0 +1,20 @@
+<nav>
+  <div class="container">
+    <div class="navbar">
+      <div class="navbar-left">
+        <a routerLink="/"><img class="logo" src="http://localhost:4200/assets/logo.png" height="64px" width="64px"></a>
+        <a routerLink="/trading">Trade</a>
+        <a routerLink="/deposit">Deposit</a>
+      </div>
+      <div class="navbar-right">
+        <button class="btn-login" *ngIf="!(authService.currentUser$ | async)" routerLink="/login">Log In</button>
+        <button *ngIf="!(authService.currentUser$ | async)" class="btn-register" routerLink="/registration">Register</button>
+        <span *ngIf="(authService.currentUser$ | async) as currentUser" class="welcome">Welcome:
+          <a routerLink="/profile">{{ currentUser?.username }}</a>
+        </span>
+        <button class="btn-logout" (click)="logout()" *ngIf="(authService.currentUser$ | async) as currentUser">Logout</button>
+      </div>      
+
+    </div>
+  </div>
+</nav>

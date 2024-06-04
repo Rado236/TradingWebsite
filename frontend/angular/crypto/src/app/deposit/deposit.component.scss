@@ -1,0 +1,67 @@
+body {
+  background-color: #E7E7E7;
+}
+
+.deposit-page {
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: 'Roboto', sans-serif;
+  height: 87vh;
+  padding-top: 4rem;
+
+}
+
+.deposit-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.deposit-header h2 {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.deposit-form {
+  display: flex;
+  flex-direction: column;
+  margin: 40px 0;
+}
+
+.deposit-amount {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.deposit-amount label {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.deposit-amount input {
+  width: 300px;
+  height: 40px;
+  font-size: 24px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+button {
+  background-color: orange;
+  color: #fff;
+  border-radius: 5px;
+  font-size: 24px;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #D49A6A;
+}

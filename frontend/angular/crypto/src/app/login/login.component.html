@@ -1,0 +1,23 @@
+<body>
+  <a routerLink="/">Go to home page</a>
+  <div class="container">
+    <div class="login-form">
+      <h2>Login</h2>
+      <form (ngSubmit)="onSubmit()">
+        
+          <label for="username">Username:</label>
+          <input type="text" name="username" id="username" [(ngModel)]="username" required>
+        
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" [(ngModel)]="password" required>
+        
+          <button type="submit">Login</button>
+        
+      </form>
+      <div class="login-form-text">
+        <p>Not registered?</p>
+        <a routerLink="/registration">Create an account</a>
+      </div>
+    </div>
+  </div>
+</body>

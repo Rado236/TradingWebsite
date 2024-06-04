@@ -1,0 +1,25 @@
+<body>
+  <a routerLink="/">Go to home page</a>
+<div class="container">
+<div class="reg-form">
+    <h2>Registration</h2>
+  <form [formGroup]="registrationForm"  (ngSubmit)="onSubmit()">
+    <label for="exampleInputEUsername1">Username</label>
+    <input type="text" name="username" class="username-field" id="exampleInputUsername1" [(ngModel)]="username" placeholder="Enter username" formControlName="username">
+    <small id="usernameHelp"></small>
+
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" class="email-field" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" [(ngModel)]="email" placeholder="Enter email" formControlName="email">
+
+    <label for="exampleInputPassword1">Password</label>
+    <input name="password" type="password" class="password-field" id="exampleInputPassword1"  [(ngModel)]="password" placeholder="Password" formControlName="password">
+
+    <div class="reg-form-text">
+      <button type="submit">Register</button>
+      <h3>Already have an account?</h3>
+      <a routerLink="/login">Click here to log in.</a>
+    </div>
+  </form>
+</div>
+</div>
+</body>

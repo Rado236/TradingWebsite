@@ -1,0 +1,24 @@
+<body>
+<app-navbar></app-navbar>
+<div class="container">
+  <div class="deposit-page">
+    <div class="deposit-header">
+      <h2>Deposit</h2>
+    </div>
+    <form class="deposit-form">
+      <label for="deposit-amount">Deposit amount:</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">$</span>
+        </div>
+        <input type="number" class="form-control" id="deposit-amount" name="amount" [(ngModel)]="dep.deposit_amount" required>
+      </div>
+      <button class="btn btn-primary mt-3" (click)="deposit()">Deposit</button>
+    </form>
+  </div>
+</div>
+
+
+
+</body>
+<app-footer></app-footer>

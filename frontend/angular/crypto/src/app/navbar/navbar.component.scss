@@ -1,0 +1,66 @@
+nav {
+    background-color: #282828;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+  }
+  
+  .navbar {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .logo {
+    margin-right: 3rem; 
+  }
+
+
+  
+  .navbar a {
+    color: white;
+    font-family: 'Merriweather', serif;
+    font-family: 'Oswald', sans-serif;
+    font-family: "Prompt", sans-serif;
+    margin-right: 1rem;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  
+  
+  .navbar-right {
+    align-items: center;
+    display: flex;
+  }
+  
+  .btn-login,
+  .btn-register,
+  .btn-logout {
+    background-color: orange;
+    border: none;
+    border-radius: 2rem;
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-left: 1rem;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-login:hover,
+  .btn-register:hover,
+  .btn-logout:hover {
+    background-color: #555;
+  }
+  
+  .welcome {
+    margin-left: 1rem;
+  }
+  span a:hover {
+    font-weight: bolder;
+  }
+  

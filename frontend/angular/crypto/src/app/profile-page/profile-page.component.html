@@ -1,0 +1,54 @@
+<body>
+<app-navbar></app-navbar>
+<div class="profile-container">
+  <div class="profile-header">
+    <h2>Welcome Back, {{ (authService.currentUser$ | async)?.username }}</h2>
+    <a (click)="deleteUser(public_address)" class="user-link">Delete Account</a>
+    <a href="" (click)="logout()" class="logout-link">Log Out</a>
+  </div>
+  <div class="profile-body">
+    <div class="wallet-container">
+      <h3>Your Wallet</h3>
+      <div class="wallet-info">
+        <p>Balance: {{total | number: '1.2-2'}} $ <button class="send-button" routerLink="/deposit">Deposit</button></p>
+        <p>Address: {{ (authService.currentUser$ | async)?.public_address }} </p>
+      </div>
+      <button class="send-button" routerLink="/trading">Trade Crypto Now!</button>
+    </div>
+    <div class="trade-container">
+      <h3>Owned cryptocurrencies</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Crypto</th>
+            <th>Amount</th>
+            <th>Price for 1</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let wallet of wallets">
+            <td>{{wallet.crypto_name}}</td>
+            <td>{{wallet.amount}}</td>
+            <td>{{wallet.value_usdt}}$</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <form [formGroup]="updateForm" (ngSubmit)="updateUser()" class="update-form">
+      <h2>Update user credentials</h2>
+      <label>Username:</label>
+      <input type="text" formControlName="username" name="username">
+      <br>
+      <label>Password:</label>
+      <input type="password" formControlName="password" name="password">
+      <br>
+      <label>Email:</label>
+      <input type="email" formControlName="email" name="email">
+      <br>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</div>
+
+
+</body>
