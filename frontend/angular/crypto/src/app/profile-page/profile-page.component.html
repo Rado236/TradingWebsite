@@ -10,7 +10,7 @@
     <div class="wallet-container">
       <h3>Your Wallet</h3>
       <div class="wallet-info">
-        <p>Balance: {{total | number: '1.2-2'}} $ <button class="send-button" routerLink="/deposit">Deposit</button></p>
+        <p>Account cost: {{total | number: '1.2-2'}} $ <button class="send-button" routerLink="/deposit">Deposit</button></p>
         <p>Address: {{ (authService.currentUser$ | async)?.public_address }} </p>
       </div>
       <button class="send-button" routerLink="/trading">Trade Crypto Now!</button>

@@ -11,6 +11,7 @@
         <button *ngIf="!(authService.currentUser$ | async)" class="btn-register" routerLink="/registration">Register</button>
         <span *ngIf="(authService.currentUser$ | async) as currentUser" class="welcome">Welcome:
           <a routerLink="/profile">{{ currentUser?.username }}</a>
+          <h6>Balance: {{deposit.toFixed(2)}} $</h6>
         </span>
         <button class="btn-logout" (click)="logout()" *ngIf="(authService.currentUser$ | async) as currentUser">Logout</button>
       </div>      

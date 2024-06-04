@@ -16,7 +16,7 @@ import formatters from "chart.js/dist/core/core.ticks";
   providers: [BaseChartDirective]
 })
 export class TradingComponent implements OnInit {
-  crypto:Crypto | null = null;// Ne znam Rado go sloji
+  //crypto:Crypto | null = null;// Ne znam Rado go sloji
 
   order:Order = {} as Order;//This will hold the input data - Order is an interface created in the folder interfaces
 
