@@ -1,56 +1,56 @@
 * {
-    font-family: 'Merriweather', serif;
-    font-family: 'Oswald', sans-serif;
-    font-family: "Prompt", sans-serif;
+  font-family: 'Merriweather', serif;
+  font-family: 'Oswald', sans-serif;
+  font-family: "Prompt", sans-serif;
 }
 
 
 .bg::before {
-  content: "";
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-  }
+content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
 
 
 
 .bg {
-  position: relative;
-  background-image: url(background.jpg);
-  margin: 0;
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
+position: relative;
+background-image: url(background.jpg);
+margin: 0;
+background-size: cover;
+background-position: center center;
+background-repeat: no-repeat;
 
 }
 
 
 
 .logingbutton{
-    background-color: orange;
-    border: 0;
-    border-radius: 2rem;
-    font-size: 30px;
-    font-weight: bold;
-    padding: 9px 20px;
+  background-color: orange;
+  border: 0;
+  border-radius: 2rem;
+  font-size: 30px;
+  font-weight: bold;
+  padding: 9px 20px;
 }
 
 
 .bg-content {
-  
-  position: relative;
-  color: aliceblue;
-  text-align: center;
-  padding: 13rem;
-  justify-content: center;
-  font-family: 'Merriweather', serif;
-  font-family: 'Oswald', sans-serif;
-  font-family: "Prompt", sans-serif;
-  z-index: 1;
+
+position: relative;
+color: aliceblue;
+text-align: center;
+padding: 13rem;
+justify-content: center;
+font-family: 'Merriweather', serif;
+font-family: 'Oswald', sans-serif;
+font-family: "Prompt", sans-serif;
+z-index: 1;
 }
 
 
@@ -61,265 +61,264 @@
 /* Cards section */
 
 .section-title {
-  
-  display: flex;
-  justify-content: center;
-  padding-bottom: 1em;
+
+display: flex;
+justify-content: center;
+padding-bottom: 1em;
 }
 
 .card-section {
-  margin: 0;
-  background-color: #f8f9fa;
-  padding: 60px 0;
-  border-radius: 40px;
-  margin-top: 50px;
-  transition: all 0.3s ease-in-out;
+margin: 0;
+background-color: #f8f9fa;
+padding: 60px 0;
+border-radius: 40px;
+margin-top: 50px;
+transition: all 0.3s ease-in-out;
 }
 
 .card {
-  background-color: #ffffff;
-  border-radius: 20px;
-  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
-  padding: 30px;
-  height: 100%;
+background-color: #ffffff;
+border-radius: 20px;
+box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+padding: 30px;
+height: 100%;
 }
 
 .card-icon {
-  background-color: #ff8800;
-  color: #ffffff;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 30px;
+background-color: #ff8800;
+color: #ffffff;
+border-radius: 50%;
+width: 50px;
+height: 50px;
+display: flex;
+justify-content: center;
+align-items: center;
+margin-bottom: 30px;
 }
 
 .card-title {
-  font-size: 28px;
-  font-weight: bold;
-  margin-bottom: 20px;
+font-size: 28px;
+font-weight: bold;
+margin-bottom: 20px;
 }
 
 .card-text {
-  font-size: 18px;
-  line-height: 1.5;
+font-size: 18px;
+line-height: 1.5;
 }
 
 .card:hover {
-  transform: translateY(-10px);
-  transition: all 0.3s ease-in-out;
-  box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.1);
+transform: translateY(-10px);
+transition: all 0.3s ease-in-out;
+box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.1);
 }
 
 @media (max-width: 768px) {
-  .card-body {
-    text-align: center;
-  }
+.card-body {
+  text-align: center;
+}
 }
 
 /*Stats sectio*/
 
 
 .stats-wrapper {
-  display: flex;
-  justify-content: space-around;
-  margin: 20px 0;
+display: flex;
+justify-content: space-around;
+margin: 20px 0;
 }
 
 .stats-stat {
-  text-align: center;
+text-align: center;
 }
 
 .stats-number {
-  font-size: 24px;
-  font-weight: bold;
+font-size: 24px;
+font-weight: bold;
 }
 
 .stats-description {
-  font-size: 14px;
-  color: #666;
+font-size: 14px;
+color: #666;
 }
 
 
 
 
-    /* security and privacy section */
+  /* security and privacy section */
+  .security-privacy {
+    background-color: #f5f5f5;
+    padding: 80px 0;
+    border-radius: 20px;
+  }
+  
+  .security-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+  } 
+  
+  .column-right {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  
+  .column-left {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  
+  .security-privacy h2 {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #292929;
+  }
+  
+  .security-privacy p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 20px;
+  }
+  
+  .security-privacy .call-to-action h2 {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #292929;
+  }
+  
+  .security-privacy .call-to-action p {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 30px;
+  }
+  
+  .security-privacy .cta-button {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #00ADEF;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 30px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .security-privacy .cta-button:hover {
+    background-color: #0077b3;
+  }
+  
+  .security-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  
+  .security-image-container img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 20px;
+  }
+  
+  @media (min-width: 768px) {
     .security-privacy {
-      background-color: #f5f5f5;
-      padding: 80px 0;
-      border-radius: 20px;
-    }
-    
-    .security-container {
-      max-width: 1200px;
-      margin: 0 auto;
       display: flex;
-      flex-wrap: wrap;
-    } 
-    
-    .column-right {
-      width: 100%;
-      padding-right: 15px;
-      padding-left: 15px;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
     }
-    
+  
     .column-left {
-      width: 100%;
-      padding-right: 15px;
-      padding-left: 15px;
+      flex-basis: 50%;
+      max-width: 50%;
+      order: 1;
+      padding-right: 30px;
     }
-    
+  
+    .column-right {
+      flex-basis: 50%;
+      max-width: 50%;
+      order: 2;
+      padding-left: 30px;
+    }
+  
     .security-privacy h2 {
-      font-size: 36px;
-      font-weight: 700;
-      margin-bottom: 20px;
-      text-align: center;
-      color: #292929;
-    }
-    
-    .security-privacy p {
-      font-size: 16px;
-      line-height: 1.8;
-      color: #555;
-      margin-bottom: 20px;
-    }
-    
-    .security-privacy .call-to-action h2 {
-      font-size: 36px;
-      font-weight: 700;
-      margin-bottom: 20px;
-      color: #292929;
-    }
-    
-    .security-privacy .call-to-action p {
-      font-size: 18px;
-      line-height: 1.8;
-      color: #555;
+      font-size: 48px;
       margin-bottom: 30px;
-    }
-    
-    .security-privacy .cta-button {
-      display: inline-block;
-      padding: 12px 24px;
-      background-color: #00ADEF;
-      color: #fff;
-      font-size: 16px;
-      font-weight: 700;
-      text-align: center;
-      text-decoration: none;
-      border-radius: 30px;
-      transition: background-color 0.3s ease;
-    }
-    
-    .security-privacy .cta-button:hover {
-      background-color: #0077b3;
-    }
-    
-    .security-image-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 30px;
-    }
-    
-    .security-image-container img {
-      max-width: 100%;
-      height: auto;
-      object-fit: cover;
-      border-radius: 20px;
-    }
-    
-    @media (min-width: 768px) {
-      .security-privacy {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-      }
-    
-      .column-left {
-        flex-basis: 50%;
-        max-width: 50%;
-        order: 1;
-        padding-right: 30px;
-      }
-    
-      .column-right {
-        flex-basis: 50%;
-        max-width: 50%;
-        order: 2;
-        padding-left: 30px;
-      }
-    
-      .security-privacy h2 {
-        font-size: 48px;
-        margin-bottom: 30px;
-        text-align: left;
-      }
-    
-      .security-privacy p {
-        font-size: 18px;
-        margin-bottom: 30px;
-        text-align: left;
-      }
-    
-      .security-privacy .call-to-action p {
-        font-size: 1.5em;
-      }
-    
-      .cta-button {
-        font-size: 24px;
-        padding: 20px 40px;
-      }
-    }
-
-
-
-    .crypto-container {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      max-width: 600px;
-    }
-    
-    .crypto-table {
-      width: 85%;    
-      margin:25px auto ;
-      border-collapse: collapse;
-    }
-    
-    .crypto-table thead th {
-      background-color: #f2f2f2;
-      padding: 10px;
       text-align: left;
     }
-    
-    .crypto-table tbody td {
-      padding: 10px;
-      border-bottom: 1px solid #ddd;
+  
+    .security-privacy p {
+      font-size: 18px;
+      margin-bottom: 30px;
+      text-align: left;
     }
-    
-    .crypto-name {
-      font-weight: bold;
+  
+    .security-privacy .call-to-action p {
+      font-size: 1.5em;
     }
-    
-    .crypto-value {
-      font-family: monospace;
+  
+    .cta-button {
+      font-size: 24px;
+      padding: 20px 40px;
     }
-    
-    .trade-button {
-      color: #fff;
-      background-color: orange;
-      border-radius: 0.3em;
-      border: none;
-      padding: 5px 10px;
-      font-size: 14px;
-    }
-    
-    .trade-button:hover {
-      background-color: #DE8B4D;
-    }
-    
+  }
+
+
+
+  .crypto-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 600px;
+  }
+  
+  .crypto-table {
+    width: 85%;    
+    margin:25px auto ;
+    border-collapse: collapse;
+  }
+  
+  .crypto-table thead th {
+    background-color: #f2f2f2;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .crypto-table tbody td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .crypto-name {
+    font-weight: bold;
+  }
+  
+  .crypto-value {
+    font-family: monospace;
+  }
+  
+  .trade-button {
+    color: #fff;
+    background-color: orange;
+    border-radius: 0.3em;
+    border: none;
+    padding: 5px 10px;
+    font-size: 14px;
+  }
+  
+  .trade-button:hover {
+    background-color: #DE8B4D;
+  }
