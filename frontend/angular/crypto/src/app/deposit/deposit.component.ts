@@ -10,6 +10,7 @@ import {Deposit} from "../interfaces/Deposit";
 })
 export class DepositComponent {
   dep:Deposit = {} as Deposit
+  min_deposit:number=5;
   constructor(private http:HttpClient,private authService: AuthService ){
     this.authService.currentUser$.subscribe(user => {
       if (user) {
@@ -19,7 +20,7 @@ export class DepositComponent {
 
   }
   deposit(){
-    if(Number(this.dep.deposit_amount) > 0){
+    if(Number(this.dep.deposit_amount) > this.min_deposit){
       this.http.post('http://localhost:8080/transfer/deposit', this.dep,{responseType:"text"}).subscribe(
         (response) => {
           alert(`Successfully added ${this.dep.deposit_amount} USDT to your account`);
@@ -30,7 +31,7 @@ export class DepositComponent {
           }
         );
     }else {
-      alert("The deposit amount is invalid! The minimum deposit amount is 0.1 USDT");
+      alert("The deposit amount is invalid! The minimum deposit amount is " +this.min_deposit+ " USDT");
     }     
   }
 }
