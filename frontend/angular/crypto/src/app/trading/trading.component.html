@@ -18,6 +18,7 @@
         <option value="BTC">BTC</option>
         <option value="ETH">ETH</option>
         <option value="ADA">ADA</option>
+        <option value="DOGE">DOGE</option>
       </select>
     </div>
 
@@ -25,7 +26,14 @@
       <label for="crypto-amount">Crypto Amount</label>
       <input id="crypto-amount" type="number" formControlName="amount" placeholder="Enter amount" class="form-control">
     </div>
-
+    <div>
+      <p class="currentCryptoInfo" *ngIf="orderForm.get('amount')?.value !== null && orderForm.get('operation')?.value==='buy'">
+        You need: {{ neededUSDT | currency:'USD'}}</p>
+      </div>
+      <div>
+        <p class="currentCryptoInfo" *ngIf="orderForm.get('crypto_name')?.value !== null && orderForm.get('crypto_name')?.value !== '' &&  orderForm.get('operation')?.value==='sell'">
+          You have: {{ crypto_amount }} {{ selectedCrypto }}</p>
+        </div>
     <div class="form-group">
       <label for="fiat-type">Fiat Type : USD</label>
       <select id="fiat-type" class="form-control">

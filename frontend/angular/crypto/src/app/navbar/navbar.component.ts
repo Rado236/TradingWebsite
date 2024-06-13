@@ -36,7 +36,7 @@ export class NavbarComponent implements OnInit{
         this.wallets = data
         console.log(this.wallets);
         for (const wallet of this.wallets) {
-          if (wallet.crypto_id=4) { 
+          if (wallet.crypto_id===4) { 
             this.deposit=wallet.amount
           }
         }

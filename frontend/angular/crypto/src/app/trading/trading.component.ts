@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, interval } from 'rxjs';
+import { Observable, Subscription, combineLatest, interval } from 'rxjs';
 import { map } from 'rxjs';
 import { Chart, registerables } from 'chart.js';
 import { BaseChartDirective, baseColors } from 'ng2-charts';
@@ -8,6 +8,12 @@ import {Order} from "../interfaces/Order";
 import {FormBuilder, FormControl, FormControlName, FormGroup} from "@angular/forms";
 import {AuthService} from "../services/authenication.service";
 import formatters from "chart.js/dist/core/core.ticks";
+import { Crypto } from '../homepage/homepage.component';
+
+export interface UserCrypto {
+  crypto_name:string;
+  amount:number;
+}
 
 @Component({
   selector: 'app-trading',
@@ -15,25 +21,44 @@ import formatters from "chart.js/dist/core/core.ticks";
   styleUrls: ['./trading.component.scss'],
   providers: [BaseChartDirective]
 })
+
+
 export class TradingComponent implements OnInit {
   //crypto:Crypto | null = null;// Ne znam Rado go sloji
 
   order:Order = {} as Order;//This will hold the input data - Order is an interface created in the folder interfaces
 
+  cryptos:Crypto[] = [];
+
+  userCrypto:UserCrypto[] = [];
+
+  selectedCrypto:string='';
+
   orderForm: FormGroup;
 
+  neededUSDT: number = 0;
+
+  crypto_amount:number=0;
+
   selectedOrder:string = "Buy/Sell";//This will gold the title above the form
+
+  private subscriptions: Subscription = new Subscription();
+
+
+  userAddress:string='';
+
 
   constructor(private http:HttpClient,private builder:FormBuilder,private authService: AuthService) {
     this.authService.currentUser$.subscribe(user => {
       if (user) {
-        this.order.public_address = user.public_address;//getting the logged user's public address
+        this.order.public_address = user.public_address;
+        this.userAddress=user.public_address;
       }
     });
     //creating values for the form
     this.orderForm=builder.group({
       crypto_name:new FormControl(""),
-      amount:new FormControl(""),
+      amount:new FormControl(null),
       operation:new FormControl("")
     })
 
@@ -44,6 +69,27 @@ export class TradingComponent implements OnInit {
       let toUpp:string = value
       this.selectedOrder = toUpp.charAt(0).toUpperCase() + toUpp.slice(1);// before passing the value
       //we change the first letter into an uppercase one
+    })
+    this.getCryptos();
+    this.getWalletContents(this.userAddress)
+    this.subscriptions.add(
+      combineLatest([
+        this.orderForm.controls['amount'].valueChanges,
+        this.orderForm.controls['crypto_name'].valueChanges
+      ]).subscribe(([amount, crypto_name]) => {
+        if (amount != null && amount !== '' && crypto_name != null && crypto_name !== '') {
+          this.calculateNeededUSDT(amount, crypto_name);
+        } else {
+          this.neededUSDT = 0;
+        }
+      })
+    );
+    this.orderForm.controls['crypto_name'].valueChanges.subscribe(crypto_name=> {
+      if(crypto_name !=null && crypto_name !== ''){
+        this.findUserCryptoAmount(crypto_name);
+      }else {
+        this.crypto_amount=0;
+      }
     })
     
   }
@@ -64,7 +110,52 @@ export class TradingComponent implements OnInit {
           alert("Transaction Failed! Please try again!")
         }
       })
-      
+  }
+  calculateNeededUSDT(amount: number,crypto_name:string): void {
+    if (crypto_name) {
+      let selectedCrypto = this.cryptos.find(crypto => crypto.crypto_name === crypto_name);
+      if (selectedCrypto && typeof selectedCrypto.value_usdt === 'number' ) {
+        const crypto_value = selectedCrypto.value_usdt;
+        if (amount && !isNaN(amount) && amount > 0) {
+          this.neededUSDT = amount * crypto_value;
+        } else {
+          this.neededUSDT = 0;
+        }
+      } else {
+        console.error(`Selected crypto not found: ${crypto_name}`);
+        this.neededUSDT = 0;
+      }
+    } else {
+      this.neededUSDT = 0;
+    }
+  }
+  findUserCryptoAmount(crypto_name:string){
+    if(crypto_name){
+      let selectedCrypto = this.userCrypto.find(userCrypto => userCrypto.crypto_name === crypto_name);
+      if(selectedCrypto && typeof selectedCrypto.amount==='number'){
+        const amount = selectedCrypto.amount;
+        this.crypto_amount=amount;
+        this.selectedCrypto = selectedCrypto.crypto_name;
+        console.log("Sel cr:",this.selectedCrypto);
+      }else {
+        this.crypto_amount=0;
+      }
+    }
+  }
+  getCryptos(){
+    this.http.get("http://localhost:8080/transfer/cryptos")
+      .subscribe((data:any)=>{
+        this.cryptos = data
+        console.log(this.cryptos)
+      })
   }
 
+  getWalletContents(public_address:string){
+    this.http.get<any>(`http://localhost:8080/transfer/getWallet?public_address=${public_address}`)
+      .subscribe((data:any)=>{
+        this.userCrypto = data
+      });
+    }
+
 }
+

@@ -1,29 +1,45 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Transaction } from '../interfaces/Transaction';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from '../services/authenication.service';
+import { UserCrypto } from '../trading/trading.component';
 
 @Component({
   selector: 'app-sendcrypto',
   templateUrl: './sendcrypto.component.html',
   styleUrls: ['./sendcrypto.component.scss']
 })
-export class SendcryptoComponent {
+export class SendcryptoComponent  implements OnInit{
 
   transaction:Transaction={} as Transaction;
   transactionForm: FormGroup;
+  crypto_amount:number=0;
+  selectedCrypto:string='';
+  userCrypto:UserCrypto[] = [];
+  userAddress:string='';
 
   constructor(private http:HttpClient,private builder:FormBuilder,private authService: AuthService) {
     this.authService.currentUser$.subscribe(user => {
       if (user) {
-        this.transaction.public_address_sender = user.public_address;//getting the logged user's public address
+        this.transaction.public_address_sender = this.userAddress= user.public_address;//getting the logged user's public address
       }
     });
     this.transactionForm=builder.group({
-      amount:new FormControl(""),
+      amount:new FormControl(null),
       public_address_reciever:new FormControl(""),
       crypto_name:new FormControl("")
+    })
+  }
+
+  ngOnInit(): void {
+    this.getWalletContents(this.userAddress);
+    this.transactionForm.controls['crypto_name'].valueChanges.subscribe(crypto_name=> {
+      if(crypto_name !=null && crypto_name !== ''){
+        this.findUserCryptoAmount(crypto_name);
+      }else {
+        this.crypto_amount=0;
+      }
     })
   }
   sendCrypto(){
@@ -44,15 +60,26 @@ export class SendcryptoComponent {
       })
   }
 
- getFormattedDateForSQL(date: Date): string {
-   const year = date.getFullYear();
-   const month = ('0' + (date.getMonth() + 1)).slice(-2); // Months are 0-based, so add 1
-   const day = ('0' + date.getDate()).slice(-2);
-   const hours = ('0' + date.getHours()).slice(-2);
-   const minutes = ('0' + date.getMinutes()).slice(-2);
-   const seconds = ('0' + date.getSeconds()).slice(-2);
+  findUserCryptoAmount(crypto_name:string){
+    if(crypto_name){
+      let selectedCrypto = this.userCrypto.find(userCrypto => userCrypto.crypto_name === crypto_name);
+      if(selectedCrypto && typeof selectedCrypto.amount==='number'){
+        const amount = selectedCrypto.amount;
+        this.crypto_amount=amount;
+        this.selectedCrypto = selectedCrypto.crypto_name;
+        console.log("Sel cr:",this.selectedCrypto);
+      }else {
+        this.crypto_amount=0;
+      }
+    }
+  }
 
-   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
- }
+  getWalletContents(public_address:string){
+    this.http.get<any>(`http://localhost:8080/transfer/getWallet?public_address=${public_address}`)
+      .subscribe((data:any)=>{
+        this.userCrypto = data
+      });
+    }
+  
 
 }

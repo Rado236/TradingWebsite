@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../services/authenication.service';
 import {Deposit} from "../interfaces/Deposit";
@@ -8,7 +8,7 @@ import {Deposit} from "../interfaces/Deposit";
   templateUrl: './deposit.component.html',
   styleUrls: ['./deposit.component.scss']
 })
-export class DepositComponent {
+export class DepositComponent implements OnInit{
   dep:Deposit = {} as Deposit
   min_deposit:number=5;
   constructor(private http:HttpClient,private authService: AuthService ){
@@ -19,12 +19,15 @@ export class DepositComponent {
     });
 
   }
+  ngOnInit(): void {
+    
+  }
   deposit(){
     if(Number(this.dep.deposit_amount) > this.min_deposit){
       this.http.post('http://localhost:8080/transfer/deposit', this.dep,{responseType:"text"}).subscribe(
         (response) => {
           alert(`Successfully added ${this.dep.deposit_amount} USDT to your account`);
-          location.reload()
+          location.reload();
         },
           (error) => {
             alert("There was an error while taking your request! ");
