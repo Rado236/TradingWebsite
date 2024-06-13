@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { FormBuilder,FormControl,FormGroup } from '@angular/forms';
 
+
 export interface Wallets {
   public_address:string;
   crypto_id:number;
@@ -12,6 +13,15 @@ export interface Wallets {
   crypto_name:string;
   value_usdt:number;
 }
+export interface Transactions{
+  id:number;
+  amount:number;
+  crypto_id:number;
+  public_address_reciever:string;
+  crypto_name:string;
+  date:number;
+}
+
 
 @Component({
   selector: 'app-profile-page',
@@ -20,6 +30,7 @@ export interface Wallets {
 })
 export class ProfilePageComponent implements OnInit {
   wallets:Wallets[]=[];
+  transactions:Transactions[]=[];
   public_address:string='';
   username:string='';
   total:number=0;
@@ -38,6 +49,7 @@ export class ProfilePageComponent implements OnInit {
         this.username=user.username;
         this.public_address=user.public_address;
         this.getWalletContents(this.public_address);
+        this.getTransactions(this.public_address);
       }
     });
   }
@@ -45,7 +57,6 @@ export class ProfilePageComponent implements OnInit {
     this.http.get<any>(`http://localhost:8080/transfer/getWallet?public_address=${public_address}`)
       .subscribe((data:any)=>{
         this.wallets = data
-        console.log(this.wallets);
         for (const wallet of this.wallets) {
           if (wallet.amount && wallet.value_usdt) { 
             this.total += wallet.value_usdt * wallet.amount;
@@ -53,6 +64,13 @@ export class ProfilePageComponent implements OnInit {
         }
       });
     }
+
+    getTransactions(public_address:string){
+      this.http.get<any>(`http://localhost:8080/transfer/getTransactions?public_address=${public_address}`)
+        .subscribe((data:any)=>{
+          this.transactions = data   
+        });
+      }
 
     deleteUser(public_address:string){
       if (confirm(`Confirm your actions! Are you sure you want to delete user: ${this.username} `)) {

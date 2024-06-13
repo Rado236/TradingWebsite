@@ -8,6 +8,7 @@ import { TradingComponent } from './trading/trading.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { DepositComponent } from './deposit/deposit.component';
 import { AuthGuardGuard } from './services/auth-guard.guard';
+import { SendcryptoComponent } from './sendcrypto/sendcrypto.component';
 
 const routes: Routes = [
   {path: "",component: HomepageComponent},
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path: "profile", component: ProfilePageComponent,canActivate:[AuthGuardGuard]},
   {path: "trading", component: TradingComponent,canActivate:[AuthGuardGuard]},
   {path: "deposit", component: DepositComponent,canActivate:[AuthGuardGuard]},
+  {path: "sendcrypto", component: SendcryptoComponent,canActivate:[AuthGuardGuard]},
   {path: "**", component: NotfoundComponent},
   
   

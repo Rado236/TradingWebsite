@@ -45,6 +45,7 @@ export class TradingComponent implements OnInit {
       this.selectedOrder = toUpp.charAt(0).toUpperCase() + toUpp.slice(1);// before passing the value
       //we change the first letter into an uppercase one
     })
+    
   }
   submitOrder(){
     //assigning values to the object
@@ -57,15 +58,13 @@ export class TradingComponent implements OnInit {
         console.log(response["status"])
         if(response["status"]==="success"){//checking what is the message we receive from the controller
           alert("Successful Transaction")
+          location.reload()
         }
         else{
-          alert("Transaction Failed - Not enough funds")
+          alert("Transaction Failed! Please try again!")
         }
-        location.reload()
       })
-
+      
   }
 
 }
-
-

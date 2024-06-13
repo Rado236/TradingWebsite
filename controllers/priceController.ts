@@ -1,8 +1,8 @@
 import {Request, Response} from "express";
-import { PriceModell } from "../models/priceModell";
 import {DepositModel} from "../models/depositModel";
 import { WalletModel } from "../models/WalletModel";
-import {OrderModel} from "../models/orderModel";
+import {OrderModel, TransactionModel} from "../models/orderModel";
+import { PriceModell } from "../models/priceModell";
 
 export const getPrice = async (req:Request, res:Response)=>{
     const crypto_name = req.params.crypto_name
@@ -47,6 +47,8 @@ export const buyOrder = async(req:Request,res:Response)=> {
         })
     }
 }
+
+
 export const sellOrder = async(req:Request, res:Response)=>{
     const inputData:OrderModel = req.body;
 
@@ -61,4 +63,30 @@ export const sellOrder = async(req:Request, res:Response)=>{
             "status":"failure"
         })
     }
+}
+
+export const sendCrypto = async(req:Request, res:Response)=>{
+    const inputData:TransactionModel = req.body;
+
+    const send:boolean = await new PriceModell().sendCrypto(inputData);
+    if(send){
+        res.send({
+            "status":"success"
+        })
+    }
+    else{
+        res.send({
+            "status":"failure"
+        })
+    }
+}
+
+export const getTransactionDetails = async(req:Request,res:Response)=>{
+    const public_address= req.query.public_address;
+    if (typeof public_address !== 'string') {
+        res.status(400).send('public_address parameter must be a string');
+        return;
+      }
+    const transactionsRes = await new WalletModel().getTransactions(public_address)
+    res.send(transactionsRes);
 }

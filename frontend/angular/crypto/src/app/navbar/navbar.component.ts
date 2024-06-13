@@ -15,6 +15,7 @@ export class NavbarComponent implements OnInit{
   public_address:string='';
   username:string='';
   deposit:number=0.00;
+  
 
   constructor(public authService: AuthService,private http:HttpClient) {
   }
@@ -47,5 +48,5 @@ export class NavbarComponent implements OnInit{
     this.authService.logout();
   }
 
-
 }
+

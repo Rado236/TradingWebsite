@@ -1,6 +1,6 @@
 import { DB } from "../core/db";
 import {DepositModel} from "./depositModel";
-import {OrderModel} from "./orderModel";
+import {OrderModel, TransactionModel} from "./orderModel";
 import {log} from "util";
 
 export class PriceModell {
@@ -110,6 +110,49 @@ export class PriceModell {
             conn.release(); // release connection
         }
 
+    }
+
+    async sendCrypto(transactionModel:TransactionModel) {
+        const conn = await this.conn.getConnection();
+        try {
+            await conn.beginTransaction(); // start transaction
+            const [chosen_crypto] = await this.conn.query("SELECT crypto_id,value_usdt FROM prices WHERE crypto_name=?",[transactionModel.crypto_name])
+            const crypto_id = chosen_crypto[0]["crypto_id"]
+            const[crypto_reciever] = await this.conn.query("SELECT public_address FROM users WHERE public_address = ? ",[transactionModel.public_address_reciever])
+            const [crypto_owned] = await this.conn.query("SELECT amount FROM wallet_contents WHERE public_address =? AND crypto_id = ?",[transactionModel.public_address_sender,crypto_id])
+            const [crypto_owned_reciever] = await this.conn.query("SELECT amount FROM wallet_contents WHERE public_address =? AND crypto_id = ?",[transactionModel.public_address_reciever,crypto_id])
+            transactionModel.date=new Date;
+            if(crypto_reciever.length===0){
+                await conn.rollback();
+                return false;
+            }
+            if(crypto_owned.length === 0 ){
+                await conn.rollback();
+                return false;
+            }
+            if(crypto_owned[0]["amount"] >= transactionModel.amount){//checking if the user has more or equal to the amount they want to sell        
+                await this.conn.execute("UPDATE wallet_contents SET amount = amount-? WHERE public_address=? AND crypto_id=?",[transactionModel.amount,transactionModel.public_address_sender,crypto_id])
+                if (crypto_owned_reciever.length === 0) {
+                    await this.conn.execute("INSERT INTO wallet_contents (public_address, crypto_id, amount) VALUES (?, ?, ?)", [transactionModel.public_address_reciever, crypto_id, transactionModel.amount]);
+                    await this.conn.execute("INSERT INTO transactions (amount,crypto_id,public_address_sender,public_address_reciever,date) VALUES (?,?,?,?,?)",[transactionModel.amount,crypto_id,transactionModel.public_address_sender,transactionModel.public_address_reciever,transactionModel.date]);
+                } else {
+                    await this.conn.execute("UPDATE wallet_contents SET amount = amount + ? WHERE public_address = ? AND crypto_id = ?", [transactionModel.amount,transactionModel.public_address_reciever, crypto_id]);
+                    await this.conn.execute("INSERT INTO transactions (amount,crypto_id,public_address_sender,public_address_reciever,date) VALUES (?,?,?,?,?)",[transactionModel.amount,crypto_id,transactionModel.public_address_sender,transactionModel.public_address_reciever,transactionModel.date]);
+                }   
+                return true;
+                
+            }
+            else{
+                return false;
+            }
+
+    
+        } catch (err) {
+            await conn.rollback(); // rollback transaction on error
+            throw err;
+        } finally {
+            conn.release(); // release connection
+        }
     }
 
 }

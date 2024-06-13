@@ -1,0 +1,31 @@
+<body>
+<app-navbar></app-navbar>
+<div class="container">
+    <div class="send-crypto-page">
+      <div class="send-crypto-header">
+        <h2>Send crypto</h2>
+      </div>
+      <form [formGroup]="transactionForm" class="crypto-send-form">
+        <label for="crypto-amount">Crypto amount:</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">$</span>
+          </div>
+          <input formControlName="amount" type="number" class="form-control" id="crypto-amount" name="amount" required>
+        </div>
+        <label  for="public_address_reciever">Reciever public address:</label>
+        <div class="input-group">
+          <input formControlName="public_address_reciever" type="text" class="form-control" id="public_address_reciever" name="public_address_reciever" required>
+        </div>
+        <label for="crypto-type">Crypto Type</label>
+            <select formControlName="crypto_name" id="crypto-type" name="crypto" class="form-control">
+                <option value="BTC">BTC</option>
+                <option value="ETH">ETH</option>
+                <option value="ADA">ADA</option>
+            </select>
+        <button class="btn btn-primary mt-3" (click)="sendCrypto()">Send crypto</button>
+      </form>
+    </div>
+  </div>
+<app-footer></app-footer>
+</body>

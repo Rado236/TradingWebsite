@@ -34,6 +34,29 @@
         </tbody>
       </table>
     </div>
+
+    <div class="trade-container">
+      <h3>Sent crypto</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Crypto</th>
+            <th>Amount</th>
+            <th>Reciever</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let transaction of transactions">
+            <td>{{transaction.crypto_name}}</td>
+            <td>{{transaction.amount}}</td>
+            <td>{{transaction.public_address_reciever}}</td>
+            <td>{{transaction.date | date: 'HH:mm:ss dd.MM.yyyy'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
     <form [formGroup]="updateForm" (ngSubmit)="updateUser()" class="update-form">
       <h2>Update user credentials</h2>
       <label>Username:</label>

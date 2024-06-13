@@ -5,6 +5,7 @@
         <a routerLink="/"><img class="logo" src="http://localhost:4200/assets/logo.png" height="64px" width="64px"></a>
         <a routerLink="/trading">Trade</a>
         <a routerLink="/deposit">Deposit</a>
+        <a routerLink="/sendcrypto">Send crypto</a>
       </div>
       <div class="navbar-right">
         <button class="btn-login" *ngIf="!(authService.currentUser$ | async)" routerLink="/login">Log In</button>
