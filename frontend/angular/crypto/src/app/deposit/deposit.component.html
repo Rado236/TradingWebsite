@@ -11,9 +11,9 @@
         <div class="input-group-prepend">
           <span class="input-group-text">$</span>
         </div>
-        <input type="number" class="form-control" id="deposit-amount" name="amount" [(ngModel)]="dep.deposit_amount" required>
+        <input type="number" class="form-control" id="deposit-amount" name="amount" [(ngModel)]="dep.deposit_amount" (ngModelChange)="depositChange($event)" required>
       </div>
-      <h6 id="deposit_warning" *ngIf="dep.deposit_amount < min_deposit">You need to deposit minimum {{min_deposit}}</h6>
+      <h6 id="deposit_warning" *ngIf="deposit_listener !== undefined && deposit_listener < min_deposit">You need to deposit minimum {{min_deposit}} $!</h6>
       <button class="btn btn-primary mt-3" (click)="deposit()">Deposit</button>
     </form>
   </div>

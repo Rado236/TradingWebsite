@@ -40,6 +40,7 @@
       <table>
         <thead>
           <tr>
+            <th>Transaction ID</th>
             <th>Crypto</th>
             <th>Amount</th>
             <th>Reciever</th>
@@ -48,6 +49,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let transaction of transactions">
+            <td>{{transaction.id}}</td>
             <td>{{transaction.crypto_name}}</td>
             <td>{{transaction.amount}}</td>
             <td>{{transaction.public_address_reciever}}</td>

@@ -11,6 +11,7 @@ import {Deposit} from "../interfaces/Deposit";
 export class DepositComponent implements OnInit{
   dep:Deposit = {} as Deposit
   min_deposit:number=5;
+  deposit_listener:number | undefined=undefined;
   constructor(private http:HttpClient,private authService: AuthService ){
     this.authService.currentUser$.subscribe(user => {
       if (user) {
@@ -20,7 +21,9 @@ export class DepositComponent implements OnInit{
 
   }
   ngOnInit(): void {
-    
+    if(this.dep.deposit_amount){
+      this.deposit_listener=this.dep.deposit_amount
+    }
   }
   deposit(){
     if(Number(this.dep.deposit_amount) > this.min_deposit){
@@ -36,5 +39,9 @@ export class DepositComponent implements OnInit{
     }else {
       alert("The deposit amount is invalid! The minimum deposit amount is " +this.min_deposit+ " USDT");
     }     
+  }
+
+  depositChange(value: number): void {
+    this.deposit_listener = value;
   }
 }

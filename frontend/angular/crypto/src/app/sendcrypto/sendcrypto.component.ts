@@ -46,7 +46,11 @@ export class SendcryptoComponent  implements OnInit{
     this.transaction.crypto_name=this.transactionForm.get('crypto_name')?.value;
     this.transaction.public_address_reciever=this.transactionForm.get('public_address_reciever')?.value;
     this.transaction.amount=this.transactionForm.get('amount')?.value;
-    this.http.put(`http://localhost:8080/transfer/send`,this.transaction,{responseType:"text"})
+    if(this.transaction.public_address_sender===this.transaction.public_address_reciever){
+      alert("You cant transfer crypto to yourself!")
+      return;
+    }else{
+      this.http.put(`http://localhost:8080/transfer/send`,this.transaction,{responseType:"text"})
       .subscribe((data)=>{
         const response = JSON.parse(data);
         console.log(response["status"])
@@ -58,6 +62,7 @@ export class SendcryptoComponent  implements OnInit{
           alert("Transaction Failed. Please check the details!")
         }
       })
+    }
   }
 
   findUserCryptoAmount(crypto_name:string){

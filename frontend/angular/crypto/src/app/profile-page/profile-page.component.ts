@@ -60,6 +60,7 @@ export class ProfilePageComponent implements OnInit {
         for (const wallet of this.wallets) {
           if (wallet.amount && wallet.value_usdt) { 
             this.total += wallet.value_usdt * wallet.amount;
+            this.wallets=this.wallets.filter(wallet=>wallet.amount && wallet.amount!==0);
           }
         }
       });
