@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { Component,OnInit } from '@angular/core';
+import { Component,HostListener,Inject,OnInit } from '@angular/core';
 
 import {interval, subscribeOn} from 'rxjs';
 import { AuthService } from '../services/authenication.service';
+
 export interface Crypto{
   crypto_id:string,
   crypto_name:string,
@@ -26,6 +27,7 @@ export class HomepageComponent implements OnInit{
       })
     //Here we get all crypto data from the prices table into an array(called cryptos) and loop though the array to visualize all the current values
   }
+  
   ngOnInit() {
     this.getCryptos()
   }
