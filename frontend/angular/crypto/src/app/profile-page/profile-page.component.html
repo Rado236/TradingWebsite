@@ -28,7 +28,7 @@
         <tbody>
           <tr *ngFor="let wallet of wallets">
             <td>{{wallet.crypto_name}}</td>
-            <td>{{wallet.amount}}</td>
+            <td>{{wallet.amount | number: '1.2-10'}}</td>
             <td>{{wallet.value_usdt}}$</td>
           </tr>
         </tbody>
@@ -51,7 +51,7 @@
           <tr *ngFor="let transaction of transactions">
             <td>{{transaction.id}}</td>
             <td>{{transaction.crypto_name}}</td>
-            <td>{{transaction.amount}}</td>
+            <td>{{transaction.amount| number: '1.2-10'}}</td>
             <td>{{transaction.public_address_reciever}}</td>
             <td>{{transaction.date | date: 'HH:mm:ss dd.MM.yyyy'}}</td>
           </tr>

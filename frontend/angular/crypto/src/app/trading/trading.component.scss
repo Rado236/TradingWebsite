@@ -36,12 +36,16 @@ label {
 }
 
 .order-button {
-
   color: #fff;
   background-color: orange;
   border-radius: 0.3em;
   border: none;
   padding: 5px;
+}
+
+.order-button.disabled {
+  color: gray; 
+  background-color: lightgray;
 }
 
 .order-button:hover {
@@ -53,3 +57,18 @@ label {
   color: red;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
+
+.sell-all-button{
+  color: #fff;
+  background-color: orange;
+  border-radius: 0.3em;
+  border: none;
+  padding: 5px;
+  text-decoration: none;
+}
+
+.sell-all-button:hover{
+  cursor: pointer;
+  background-color: gray;
+}
+

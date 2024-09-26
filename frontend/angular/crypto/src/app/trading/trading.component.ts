@@ -97,6 +97,10 @@ export class TradingComponent implements OnInit {
     //assigning values to the object
     this.order.crypto_name = this.orderForm.get('crypto_name')?.value;
     this.order.amount = this.orderForm.get('amount')?.value;
+    if(this.order.amount===0 || this.order.amount === null){
+      alert("Please enter valid amount and try again!")
+      return
+    }
     //The order object has been filled, we pass it as argument since the controller requires the same object(check priceController.ts)
     this.http.put(`http://localhost:8080/transfer/${this.orderForm.get('operation')?.value}`,this.order,{responseType:"text"})
       .subscribe((data)=>{
@@ -157,5 +161,20 @@ export class TradingComponent implements OnInit {
       });
     }
 
+    sellAll(){
+      const format=this.crypto_amount.toFixed(10)
+      this.orderForm.patchValue({ amount: format });
+    }
+
+    get buttonText():string{
+      const operation=this.orderForm.get('operation')?.value;
+      if(operation==='sell'){
+        return `Sell ${this.selectedCrypto}`
+      }
+      else if(operation==='buy'){
+        return `Buy ${this.selectedCrypto}`
+      }
+      return "Choose order"
+    }
 }
 

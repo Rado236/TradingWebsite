@@ -32,7 +32,7 @@
       </div>
       <div>
         <p class="currentCryptoInfo" *ngIf="orderForm.get('crypto_name')?.value !== null && orderForm.get('crypto_name')?.value !== '' &&  orderForm.get('operation')?.value==='sell'">
-          You have: {{ crypto_amount }} {{ selectedCrypto }}</p>
+          You have: {{ crypto_amount | number: '1.2-10' }} {{ selectedCrypto }} <a class="sell-all-button" (click)="sellAll()" >Sell all?</a></p>
         </div>
     <div class="form-group">
       <label for="fiat-type">Fiat Type : USD</label>
@@ -41,7 +41,7 @@
       </select>
     </div>
     <div class="form-group">
-      <button class="order-button" type="submit">Order</button>
+      <button  class="order-button" type="submit" [disabled]="this.orderForm.get('operation')?.value ==='' && orderForm.get('crypto_name')?.value === null">{{buttonText}}</button>
     </div>
   </form>
 </div>
