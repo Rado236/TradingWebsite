@@ -36,23 +36,26 @@
     </div>
 
     <div class="trade-container">
-      <h3>Sent crypto</h3>
-      <table>
+        <button [ngClass]="{'active' : isSentTransactionsView}" class="transactions-buttons" (click)="showSentTransactions()" type="button">Sent</button>
+        <button [ngClass]="{'active' : !isSentTransactionsView}" class="transactions-buttons" (click)="showRecievedTransactions()" type="button">Recieved</button>
+      <h3>{{isSentTransactionsView ? 'Sent crypto transactions' : 'Recieved crypto transactions'}}</h3>
+      <h5 *ngIf="transactionsFilter.length == 0">No transactions yet</h5>
+      <table *ngIf="transactionsFilter.length >= 1">
         <thead>
           <tr>
             <th>Transaction ID</th>
             <th>Crypto</th>
             <th>Amount</th>
-            <th>Reciever</th>
+            <th>{{isSentTransactionsView ?  'Reciever' : 'Sender'}}</th>
             <th>Date</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let transaction of transactions">
+          <tr *ngFor="let transaction of transactionsFilter">
             <td>{{transaction.id}}</td>
             <td>{{transaction.crypto_name}}</td>
             <td>{{transaction.amount| number: '1.2-10'}}</td>
-            <td>{{transaction.public_address_reciever}}</td>
+            <td>{{isSentTransactionsView ?  transaction.public_address_reciever : transaction.public_address_sender}}</td>
             <td>{{transaction.date | date: 'HH:mm:ss dd.MM.yyyy'}}</td>
           </tr>
         </tbody>

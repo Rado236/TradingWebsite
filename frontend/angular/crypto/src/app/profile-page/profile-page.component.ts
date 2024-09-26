@@ -18,6 +18,7 @@ export interface Transactions{
   amount:number;
   crypto_id:number;
   public_address_reciever:string;
+  public_address_sender:string;
   crypto_name:string;
   date:number;
 }
@@ -34,7 +35,9 @@ export class ProfilePageComponent implements OnInit {
   public_address:string='';
   username:string='';
   total:number=0;
+  transactionsFilter:Transactions[]=[];
   updateForm:FormGroup
+  isSentTransactionsView:boolean=true;
   constructor(public authService:AuthService,private http:HttpClient,private router:Router,private formBuilder:FormBuilder,) {
     this.updateForm = this.formBuilder.group( {
       username:new FormControl(''),
@@ -70,7 +73,17 @@ export class ProfilePageComponent implements OnInit {
       this.http.get<any>(`http://localhost:8080/transfer/getTransactions?public_address=${public_address}`)
         .subscribe((data:any)=>{
           this.transactions = data   
+          this.showSentTransactions();
         });
+      }
+
+      showSentTransactions(){
+        this.isSentTransactionsView=true;
+        this.transactionsFilter=this.transactions.filter(transaction=>transaction.public_address_sender===this.public_address)
+      }
+      showRecievedTransactions(){
+        this.isSentTransactionsView=false;
+        this.transactionsFilter=this.transactions.filter(transaction=>transaction.public_address_reciever===this.public_address)
       }
 
     deleteUser(public_address:string){

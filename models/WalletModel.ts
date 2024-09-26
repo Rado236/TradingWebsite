@@ -30,7 +30,7 @@ export class WalletModel extends UserModel{
         return rows;
     }
     async getTransactions(public_address:string){
-        const [rows]=await this.con.execute("SELECT * FROM transactions JOIN prices on transactions.crypto_id=prices.crypto_id WHERE public_address_sender = ?",[public_address])
+        const [rows]=await this.con.execute("SELECT * FROM transactions JOIN prices on transactions.crypto_id=prices.crypto_id WHERE public_address_sender = ? OR public_address_reciever= ?",[public_address,public_address])
         return rows;
     }
 }
