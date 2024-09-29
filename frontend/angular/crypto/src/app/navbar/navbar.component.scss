@@ -4,7 +4,19 @@ nav {
     display: flex;
     justify-content: space-between;
     padding: 0.5rem;
+    animation: slideIn 0.9s forwards;
   }
+
+  @keyframes slideIn {
+    from {
+        transform: translateY(-30px); /* Start from above */
+        opacity: 0; /* Start invisible */
+    }
+    to {
+        transform: translateY(0); /* Move to original position */
+        opacity: 1; /* Fade in */
+    }
+}
   
   .navbar {
     align-items: center;

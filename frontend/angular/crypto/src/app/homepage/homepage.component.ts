@@ -16,6 +16,14 @@ export interface Crypto{
 })
 export class HomepageComponent implements OnInit{
   cryptos:Crypto[] = []
+  stat1=0;
+  stat2=0;
+  stat3=0;
+
+  private stat1target=145;
+  private stat2target=100;
+  private stat3target=110;
+  private duration=3000;
   constructor(private http:HttpClient,public authService:AuthService){
 
 }
@@ -30,6 +38,21 @@ export class HomepageComponent implements OnInit{
   
   ngOnInit() {
     this.getCryptos()
+    this.counter();
+  }
+  counter(){
+    const startTime=performance.now();
+    const animate=(currentTime:number)=>{
+      const elTime=currentTime-startTime;
+      const progress=Math.min(elTime/this.duration,1);
+      this.stat1 = Math.floor(this.stat1target * progress);
+      this.stat2 = Math.floor(this.stat2target * progress);
+      this.stat3 = Math.floor(this.stat3target * progress);
+      if(progress<1){
+        requestAnimationFrame(animate);
+      }
+    };
+    requestAnimationFrame(animate);
   }
 }
   //   this.http.get<any>(`http://localhost:8080/api/price/${this.btc}`).subscribe(

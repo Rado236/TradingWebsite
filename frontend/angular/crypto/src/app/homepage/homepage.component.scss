@@ -2,6 +2,7 @@
   font-family: 'Merriweather', serif;
   font-family: 'Oswald', sans-serif;
   font-family: "Prompt", sans-serif;
+  animation: fadeInUp 2s ease-out forwards;
 }
 
 
@@ -25,10 +26,20 @@ margin: 0;
 background-size: cover;
 background-position: center center;
 background-repeat: no-repeat;
-
+justify-content: center;
+align-items: center;
 }
 
-
+@keyframes fadeInUp {
+  0% {
+      opacity: 0; /* Fully transparent */
+      transform: translateY(-20px); /* Move up */
+  }
+  100% {
+      opacity: 1; /* Fully opaque */
+      transform: translateY(0); /* Final position */
+  }
+}
 
 .logingbutton{
   background-color: orange;
@@ -53,15 +64,48 @@ font-family: "Prompt", sans-serif;
 z-index: 1;
 }
 
+@media (max-width: 1024px) {
+  .bg {
+    background-position: center top;
+  }
 
+  .bg-content {
+    padding: 4rem; /* Reduced padding for tablets */
+  }
 
+  .logingbutton {
+    font-size: 25px; /* Smaller font for tablets */
+    padding: 12px 25px;
+  }
+}
 
+/* For screens smaller than 768px (portrait tablets and larger phones) */
+@media (max-width: 768px) {
+  .bg-content {
+    padding: 3rem; /* Further reduce padding for tablets in portrait mode */
+  }
 
+  .logingbutton {
+    font-size: 20px; /* Adjust button font size */
+    padding: 10px 20px;
+  }
+}
+
+/* For screens smaller than 480px (mobile devices) */
+@media (max-width: 480px) {
+  .bg-content {
+    padding: 2rem; /* Minimal padding for mobile devices */
+  }
+
+  .logingbutton {
+    font-size: 18px; /* Smaller button for mobile */
+    padding: 8px 16px;
+  }
+}
 
 /* Cards section */
 
 .section-title {
-
 display: flex;
 justify-content: center;
 padding-bottom: 1em;
@@ -113,6 +157,8 @@ transition: all 0.3s ease-in-out;
 box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.1);
 }
 
+
+
 @media (max-width: 768px) {
 .card-body {
   text-align: center;
@@ -142,6 +188,14 @@ font-size: 14px;
 color: #666;
 }
 
+@media (max-width: 768px) {
+  .stats-wrapper {
+    flex-direction: column;
+  }
+  .stats-stat{
+    margin-top:10px;
+  }
+}
 
 
 
@@ -161,14 +215,18 @@ color: #666;
   
   .column-right {
     width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
+    text-align: center;
+    align-items: center;
+    // padding-right: 15px;
+    // padding-left: 15px;
   }
   
   .column-left {
     width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
+    // padding-right: 15px;
+    // padding-left: 15px;
+    text-align: center;
+    align-items: center;
   }
   
   .security-privacy h2 {
@@ -231,50 +289,7 @@ color: #666;
     border-radius: 20px;
   }
   
-  @media (min-width: 768px) {
-    .security-privacy {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-    }
   
-    .column-left {
-      flex-basis: 50%;
-      max-width: 50%;
-      order: 1;
-      padding-right: 30px;
-    }
-  
-    .column-right {
-      flex-basis: 50%;
-      max-width: 50%;
-      order: 2;
-      padding-left: 30px;
-    }
-  
-    .security-privacy h2 {
-      font-size: 48px;
-      margin-bottom: 30px;
-      text-align: left;
-    }
-  
-    .security-privacy p {
-      font-size: 18px;
-      margin-bottom: 30px;
-      text-align: left;
-    }
-  
-    .security-privacy .call-to-action p {
-      font-size: 1.5em;
-    }
-  
-    .cta-button {
-      font-size: 24px;
-      padding: 20px 40px;
-    }
-  }
-
 
 
   .crypto-container {
@@ -283,6 +298,7 @@ color: #666;
     justify-content: center;
     align-items: center;
     max-width: 600px;
+    overflow-x:auto;
   }
   
   .crypto-table {
