@@ -29,7 +29,7 @@ export class RegistrationComponent {
       return;
     }
     else{// send login data to backend
-      this.http.post('http://localhost:8080/api/user/register',{username:this.username, password:this.password,email:this.email},)
+      this.http.post('https://tradingbackend.vercel.app/api/user/register',{username:this.username, password:this.password,email:this.email},)
         .subscribe(() => {
           alert("successfully registered user! You will be redirected to the homepage!");
           this.router.navigate(['/']);

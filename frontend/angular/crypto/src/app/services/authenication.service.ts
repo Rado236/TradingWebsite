@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
-
 export class AuthService {
   public currentUserSubject: BehaviorSubject<{ username: string; public_address: string } | null>;
   public currentUser$: Observable<{ username: string; public_address: string } | null>;
@@ -18,18 +17,22 @@ export class AuthService {
   }
 
   public login(username: string): void {
-    // Check the username and password in the db
-    localStorage.setItem('currentUser', JSON.stringify({ username: username, public_address: '' }));
-    this.currentUserSubject.next({ username: username, public_address: '' });
-    this.http.get<any>('http://localhost:8080/api/user/' + username).subscribe(response => {
-      if (response) {
-        const user = { username: username, public_address: response[0].public_address };
-        localStorage.setItem('currentUser', JSON.stringify(user));
-        this.currentUserSubject.next(user);
-        console.log(user.public_address);
-      }
-    });
-  }
+    this.http.get<any>(`https://tradingbackend.vercel.app/api/user/${username}`).subscribe(
+        response=> {
+            if (response) {
+                const user = { username: username, public_address: response[0].public_address };
+                localStorage.setItem('currentUser', JSON.stringify(user)); // Store user in localStorage
+                this.currentUserSubject.next(user); // Update current user subject
+                console.log("User logged in:", user); // Log the logged-in user details
+            } else {
+                console.error("Public address not found in response");
+            }
+        },
+        error => {
+            console.error("Error during login:", error); // Log any errors encountered
+        }
+    );
+}
 
   public logout(): void {
     localStorage.removeItem('currentUser');
@@ -38,7 +41,7 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    // check if currentUserSubject has a value
+    // Check if currentUserSubject has a value
     return !!this.currentUserSubject.getValue();
   }
 

@@ -42,7 +42,7 @@ export class SendcryptoComponent  implements OnInit{
       }
     })
   }
-  sendCrypto(){
+  sendCrypto1(){
     this.transaction.crypto_name=this.transactionForm.get('crypto_name')?.value;
     this.transaction.public_address_reciever=this.transactionForm.get('public_address_reciever')?.value;
     this.transaction.amount=this.transactionForm.get('amount')?.value;
@@ -50,7 +50,8 @@ export class SendcryptoComponent  implements OnInit{
       alert("You cant transfer crypto to yourself!")
       return;
     }else{
-      this.http.put(`http://localhost:8080/transfer/send`,this.transaction,{responseType:"text"})
+      console.log(this.transaction);
+      this.http.put(`https://tradingbackend.vercel.app/transfer/send`,this.transaction,{headers: { 'Content-Type': 'application/json' },responseType:"text"})
       .subscribe((data)=>{
         const response = JSON.parse(data);
         console.log(response["status"])
@@ -78,9 +79,53 @@ export class SendcryptoComponent  implements OnInit{
       }
     }
   }
+  sendCrypto() {
+    // Ensure the form controls are properly defined and get their values
+    const cryptoNameControl = this.transactionForm.get('crypto_name');
+    const publicAddressReceiverControl = this.transactionForm.get('public_address_reciever');
+    const amountControl = this.transactionForm.get('amount');
+
+    // Check if all form controls are present and get their values
+    if (!cryptoNameControl || !publicAddressReceiverControl || !amountControl) {
+        alert("Please fill out all fields correctly.");
+        return;
+    }
+
+    // Populate the transaction object
+    this.transaction.crypto_name = cryptoNameControl.value;
+    this.transaction.public_address_reciever = publicAddressReceiverControl.value;
+    this.transaction.amount = amountControl.value;
+
+    // Check if the sender and receiver addresses are the same
+    if (this.transaction.public_address_sender === this.transaction.public_address_reciever) {
+        alert("You can't transfer crypto to yourself!");
+        return;
+    }
+    // Send the PUT request with the populated transaction object
+    this.http.put(`https://tradingbackend.vercel.app/transfer/send`, this.transaction, {
+        headers: { 'Content-Type': 'application/json' },
+        responseType: 'text'
+    })
+    .subscribe((data) => {
+        const response = JSON.parse(data);
+        console.log(response["status"]);
+        
+        if (response["status"] === "success") { // Checking what is the message we receive from the controller
+            alert("Successful Transaction");
+            location.reload();
+        } else {
+            alert("Transaction Failed. Please check the details!");
+        }
+    }, (error) => {
+        // Handle errors from the HTTP request
+        console.error("Error occurred during transaction:", error);
+        alert("An error occurred while processing your transaction. Please try again.");
+    });
+}
+
 
   getWalletContents(public_address:string){
-    this.http.get<any>(`http://localhost:8080/transfer/getWallet?public_address=${public_address}`)
+    this.http.get<any>(`https://tradingbackend.vercel.app/transfer/getWallet?public_address=${public_address}`)
       .subscribe((data:any)=>{
         this.userCrypto = data
       });

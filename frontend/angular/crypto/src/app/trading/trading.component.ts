@@ -102,7 +102,7 @@ export class TradingComponent implements OnInit {
       return
     }
     //The order object has been filled, we pass it as argument since the controller requires the same object(check priceController.ts)
-    this.http.put(`http://localhost:8080/transfer/${this.orderForm.get('operation')?.value}`,this.order,{responseType:"text"})
+    this.http.put(`https://tradingbackend.vercel.app/transfer/${this.orderForm.get('operation')?.value}`,this.order,{responseType:"text"})
       .subscribe((data)=>{
         const response = JSON.parse(data);
         console.log(response["status"])
@@ -147,7 +147,7 @@ export class TradingComponent implements OnInit {
     }
   }
   getCryptos(){
-    this.http.get("http://localhost:8080/transfer/cryptos")
+    this.http.get("https://tradingbackend.vercel.app/transfer/cryptos")
       .subscribe((data:any)=>{
         this.cryptos = data
         console.log(this.cryptos)
@@ -155,7 +155,7 @@ export class TradingComponent implements OnInit {
   }
 
   getWalletContents(public_address:string){
-    this.http.get<any>(`http://localhost:8080/transfer/getWallet?public_address=${public_address}`)
+    this.http.get<any>(`https://tradingbackend.vercel.app/getWallet?public_address=${public_address}`)
       .subscribe((data:any)=>{
         this.userCrypto = data
       });

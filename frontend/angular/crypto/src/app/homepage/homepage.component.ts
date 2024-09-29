@@ -20,7 +20,7 @@ export class HomepageComponent implements OnInit{
 
 }
   getCryptos(){
-    this.http.get("http://localhost:8080/transfer/cryptos")
+    this.http.get("https://tradingbackend.vercel.app/transfer/cryptos")
       .subscribe((data:any)=>{
         this.cryptos = data
         console.log(this.cryptos)

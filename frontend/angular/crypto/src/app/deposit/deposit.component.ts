@@ -27,7 +27,7 @@ export class DepositComponent implements OnInit{
   }
   deposit(){
     if(Number(this.dep.deposit_amount) > this.min_deposit){
-      this.http.post('http://localhost:8080/transfer/deposit', this.dep,{responseType:"text"}).subscribe(
+      this.http.post('https://tradingbackend.vercel.app/transfer/deposit', this.dep,{headers: { 'Content-Type': 'application/json' },responseType:"text"}).subscribe(
         (response) => {
           alert(`Successfully added ${this.dep.deposit_amount} USDT to your account`);
           location.reload();

@@ -18,6 +18,7 @@ import { NgChartsModule } from 'ng2-charts';
 import 'chart.js';
 import { DepositComponent } from './deposit/deposit.component';
 import { SendcryptoComponent } from './sendcrypto/sendcrypto.component';
+import { WithdrawComponent } from './withdraw/withdraw.component';
 
 
 
@@ -33,7 +34,8 @@ import { SendcryptoComponent } from './sendcrypto/sendcrypto.component';
     FooterComponent,
     ProfilePageComponent,
     DepositComponent,
-    SendcryptoComponent
+    SendcryptoComponent,
+    WithdrawComponent
   ],
   imports: [
     BrowserModule,

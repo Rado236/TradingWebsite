@@ -25,13 +25,16 @@ export class NavbarComponent implements OnInit{
         if (user) {
           this.username=user.username;
           this.public_address=user.public_address;
+          console.log("Pub",this.public_address)
+          console.log(user)
           this.getWalletContents(this.public_address);
         }
       });
   }
 
     getWalletContents(public_address:string){
-    this.http.get<any>(`http://localhost:8080/transfer/getWallet?public_address=${public_address}`)
+    const string_pub=public_address.trim();
+    this.http.get<any>(`https://tradingbackend.vercel.app/transfer/getWallet?public_address=${string_pub}`)
       .subscribe((data:any)=>{
         this.wallets = data
         console.log(this.wallets);
@@ -47,6 +50,7 @@ export class NavbarComponent implements OnInit{
   logout(): void {
     this.authService.logout();
   }
+
 
 }
 

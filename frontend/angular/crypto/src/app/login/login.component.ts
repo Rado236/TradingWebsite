@@ -19,7 +19,7 @@ export class LoginComponent  {
 
   onSubmit() {
     // send login data to backend
-    this.http.post('http://localhost:8080/api/login',{username:this.username, password:this.password})
+    this.http.post('https://tradingbackend.vercel.app/api/login',{username:this.username, password:this.password})
       .subscribe((response:any) => {
         if(response.message==='User exists') {
         // login successful

@@ -57,7 +57,7 @@ export class ProfilePageComponent implements OnInit {
     });
   }
   getWalletContents(public_address:string){
-    this.http.get<any>(`http://localhost:8080/transfer/getWallet?public_address=${public_address}`)
+    this.http.get<any>(`https://tradingbackend.vercel.app/transfer/getWallet?public_address=${public_address}`)
       .subscribe((data:any)=>{
         this.wallets = data
         for (const wallet of this.wallets) {
@@ -70,7 +70,7 @@ export class ProfilePageComponent implements OnInit {
     }
 
     getTransactions(public_address:string){
-      this.http.get<any>(`http://localhost:8080/transfer/getTransactions?public_address=${public_address}`)
+      this.http.get<any>(`https://tradingbackend.vercel.app/transfer/getTransactions?public_address=${public_address}`)
         .subscribe((data:any)=>{
           this.transactions = data   
           this.showSentTransactions();
@@ -88,7 +88,7 @@ export class ProfilePageComponent implements OnInit {
 
     deleteUser(public_address:string){
       if (confirm(`Confirm your actions! Are you sure you want to delete user: ${this.username} `)) {
-        this.http.delete(`http://localhost:8080/api/user/${public_address}`).subscribe(()=>{
+        this.http.delete(`https://tradingbackend.vercel.app/api/user/${public_address}`).subscribe(()=>{
             alert("User is deleted. You will be redirected to the main page!");
             this.logout();
             this.router.navigate(['/']);
@@ -105,7 +105,7 @@ export class ProfilePageComponent implements OnInit {
         email: (email !== '') ? email : undefined
       };
     
-      this.http.put(`http://localhost:8080/api/user/update/${public_address}`, requestBody, { responseType: 'text' })
+      this.http.put(`https://tradingbackend.vercel.app/api/user/update/${public_address}`, requestBody, { responseType: 'text' })
         .subscribe(() => {
           location.reload();
           this.authService.updateUsername(requestBody.username);
