@@ -43,6 +43,7 @@ export class TradingComponent implements OnInit {
   selectedOrder:string = "Buy/Sell";//This will gold the title above the form
 
   private subscriptions: Subscription = new Subscription();
+  isLoading:boolean=false;
 
 
   userAddress:string='';
@@ -94,6 +95,7 @@ export class TradingComponent implements OnInit {
     
   }
   submitOrder(){
+    this.isLoading=true;
     //assigning values to the object
     this.order.crypto_name = this.orderForm.get('crypto_name')?.value;
     this.order.amount = this.orderForm.get('amount')?.value;
@@ -107,10 +109,12 @@ export class TradingComponent implements OnInit {
         const response = JSON.parse(data);
         console.log(response["status"])
         if(response["status"]==="success"){//checking what is the message we receive from the controller
+          this.isLoading=false;
           alert("Successful Transaction")
           location.reload()
         }
         else{
+          this.isLoading=false;
           alert("Transaction Failed! Please try again!")
         }
       })

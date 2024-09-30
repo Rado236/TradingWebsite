@@ -1,5 +1,10 @@
 <body>
 <app-navbar></app-navbar>
+<div class="spinner-container" *ngIf="isLoading">
+  <div class="spinner">
+  </div>
+    <p >Your crypto is on the way...please wait...</p>
+</div>
 <div class="container">
     <div class="send-crypto-page">
       <div class="send-crypto-header">

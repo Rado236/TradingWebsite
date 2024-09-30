@@ -1,5 +1,10 @@
 <body>
 <app-navbar></app-navbar>
+<div class="spinner-container" *ngIf="isLoading">
+<div class="spinner">
+</div>
+  <p >Processing transaction...please wait...</p>
+</div>
 <div class="container">
   <div class="deposit-page">
     <div class="deposit-header">

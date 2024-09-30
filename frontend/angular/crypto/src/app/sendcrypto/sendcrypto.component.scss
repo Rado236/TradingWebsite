@@ -17,6 +17,7 @@ body {
     align-items: center;
     padding: 20px 0;
     border-bottom: 1px solid #e5e5e5;
+    animation: slideHeader 1s ease-in-out;
   }
   
   .deposit-header h2 {
@@ -29,6 +30,7 @@ body {
     display: flex;
     flex-direction: column;
     margin: 40px 0;
+    animation: slide 1s ease-in-out;
   }
   
   .crypto-amount {
@@ -70,4 +72,70 @@ body {
     margin-top: 20px;
     color: red;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+
+  @keyframes slide {
+    0% {
+        transform: translateX(-100px); 
+    }
+    50% {
+        transform: translateX(50px); /* Move to original position */
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes slideHeader {
+    0% {
+        transform: translateY(-100px); 
+        opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 100;
+    }
+  }
+
+  .spinner {
+    position: fixed;
+    transform: translate(-50%, -50%);
+    top: 30%;
+    margin: 10px auto 0px;
+    border: 14px solid white;
+    border-top: 14px solid darkorange;
+    border-radius: 50%;
+    width: 140px;
+    height:140px;
+    z-index: 9999;
+    animation: spin 1s linear;
+    animation-iteration-count: infinite;
+  }
+  .spinner-container p {
+    margin-top: 20px; 
+    font-size: 18px;
+    color: white;
+    text-align: center;
+  }
+  .spinner-container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 9998;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  @keyframes spin{
+    0% {
+        transform: rotate(0deg)
+    }
+    100%{
+        transform: rotate(360deg);
+    }
   }

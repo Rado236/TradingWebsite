@@ -12,12 +12,14 @@ import { AuthService } from '../services/authenication.service';
 export class LoginComponent  {
   username: string = '';
   password: string = '';
+  isLoading:boolean=false;
 
   constructor(private http: HttpClient,private authService:AuthService,private router:Router) { 
     
   }
 
   onSubmit() {
+    this.isLoading=true;
     // send login data to backend
     this.http.post('https://tradingbackend.vercel.app/api/login',{username:this.username, password:this.password})
       .subscribe((response:any) => {
@@ -25,15 +27,17 @@ export class LoginComponent  {
         // login successful
           console.log("mai stana");
           this.authService.login(this.username);
+          this.isLoading=false;
           this.router.navigate(['/']);
         }
         else {
+          this.isLoading=false;
           alert(response.message);
         }
       }, error => {
+        this.isLoading=false;
         // login failed
         console.error(error);
       });
-
   }
 }

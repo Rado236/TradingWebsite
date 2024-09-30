@@ -1,5 +1,10 @@
 <body>
 <app-navbar></app-navbar>
+<div class="spinner-container" *ngIf="isLoading">
+  <div class="spinner">
+  </div>
+    <p >Processing your {{selectedOrder}} transaction...please wait...</p>
+  </div>
 <div class="crypto-container">
   <form [formGroup]="orderForm" (ngSubmit)="submitOrder()" class="crypto-buy-sell">
     <h3 class="crypto-header">{{ selectedOrder }} Crypto</h3>

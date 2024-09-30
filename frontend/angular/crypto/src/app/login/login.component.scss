@@ -57,8 +57,8 @@ body {
   
 .login-form button[type="submit"] {
     display: block;
-    margin-top: 30px;
-    padding: 10px 20px;
+    margin: 30px auto 0;
+    padding: 10px 50px;
     background-color: orange;
     color: #fff;
     border: none;
@@ -81,3 +81,22 @@ body {
     color: #007bff;
   }
   
+  .spinner {
+    display: block;
+    margin: 10px auto 0px;
+    border: 14px solid white;
+    border-top: 14px solid darkorange;
+    border-radius: 50%;
+    width: 70px;
+    height:70px;
+    animation: spin 1s linear;
+  }
+
+  @keyframes spin{
+    0% {
+        transform: rotate(0deg)
+    }
+    100%{
+        transform: rotate(100deg);
+    }
+  }
