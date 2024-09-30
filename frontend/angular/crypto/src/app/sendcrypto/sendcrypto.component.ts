@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/authenication.service';
 import { UserCrypto } from '../trading/trading.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-sendcrypto',
@@ -20,7 +21,7 @@ export class SendcryptoComponent  implements OnInit{
   userAddress:string='';
   isLoading:boolean=false;
 
-  constructor(private http:HttpClient,private builder:FormBuilder,private authService: AuthService) {
+  constructor(private http:HttpClient,private builder:FormBuilder,private authService: AuthService,private toastrService:ToastrService) {
     this.authService.currentUser$.subscribe(user => {
       if (user) {
         this.transaction.public_address_sender = this.userAddress= user.public_address;//getting the logged user's public address
@@ -42,6 +43,15 @@ export class SendcryptoComponent  implements OnInit{
         this.crypto_amount=0;
       }
     })
+    const messageSuccess = localStorage.getItem('toastrMessage');
+    if (messageSuccess) {
+      this.toastrService.success(messageSuccess, 'Success', {
+        timeOut: 3000, 
+        closeButton: true, 
+        progressBar: true, 
+      });
+      localStorage.removeItem('toastrMessage');
+    }
   }
   findUserCryptoAmount(crypto_name:string){
     if(crypto_name){
@@ -63,14 +73,22 @@ export class SendcryptoComponent  implements OnInit{
     const amountControl = this.transactionForm.get('amount');
 
     if (this.transactionForm.invalid) {
-      alert("Please fill out all fields correctly.");
+      this.toastrService.error('Please fill all the fields correctly!', 'Error', {
+        timeOut: 3000, 
+        closeButton: true, 
+        progressBar: true, 
+      });
       return;
     }
     this.transaction.crypto_name = cryptoNameControl?.value;
     this.transaction.public_address_reciever = publicAddressReceiverControl?.value;
     this.transaction.amount = amountControl?.value;
     if (this.transaction.public_address_sender === this.transaction.public_address_reciever) {
-      alert("You can't transfer crypto to yourself!");
+      this.toastrService.error('You cant transfer crypto to yourself!', 'Error', {
+        timeOut: 3000, 
+        closeButton: true, 
+        progressBar: true, 
+      });
       return;
     }
     this.isLoading=true;
@@ -85,17 +103,27 @@ export class SendcryptoComponent  implements OnInit{
         
         if (response["status"] === "success") { // Checking what is the message we receive from the controller
             this.isLoading=false;
-            alert("Successful Transaction");
+            const messageSuccess = `Successful Transaction`;
+            localStorage.setItem('toastrMessage', messageSuccess);
             location.reload();
         } else {
           this.isLoading=false;
-            alert("Transaction Failed. Please check the details!");
+            //alert("Transaction Failed. Please check the details!");
+            this.toastrService.error('Transaction failed', 'Error', {
+              timeOut: 3000, 
+              closeButton: true, 
+              progressBar: true, 
+            });
         }
     }, (error) => {
         this.isLoading=false;
         // Handle errors from the HTTP request
         console.error("Error occurred during transaction:", error);
-        alert("An error occurred while processing your transaction. Please try again.");
+        this.toastrService.error('An error occurred while processing your transaction. Please try again.', 'Error', {
+          timeOut: 3000, 
+          closeButton: true, 
+          progressBar: true, 
+        });
     });
 }
 

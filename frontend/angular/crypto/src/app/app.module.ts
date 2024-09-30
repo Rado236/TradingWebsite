@@ -19,6 +19,7 @@ import 'chart.js';
 import { DepositComponent } from './deposit/deposit.component';
 import { SendcryptoComponent } from './sendcrypto/sendcrypto.component';
 import { WithdrawComponent } from './withdraw/withdraw.component';
+import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -44,7 +45,11 @@ import { WithdrawComponent } from './withdraw/withdraw.component';
     HttpClientModule,
     FormsModule,
     NgChartsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserModule,
+    ToastrModule.forRoot({
+      timeOut:3000
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

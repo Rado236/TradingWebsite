@@ -1,7 +1,8 @@
-import { Component,OnInit  } from '@angular/core';
+import { Component,Input,OnInit  } from '@angular/core';
 import { AuthService } from '../services/authenication.service';
 import { Wallets } from '../profile-page/profile-page.component';
 import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-navbar',
@@ -9,16 +10,18 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./navbar.component.scss']
 })
 
-
 export class NavbarComponent implements OnInit{
   wallets:Wallets[]=[];
   public_address:string='';
   username:string='';
   deposit:number=0.00;
+
   
 
   constructor(public authService: AuthService,private http:HttpClient) {
   }
+
+
 
   ngOnInit(){
       this.authService.currentUser$.subscribe(user => {

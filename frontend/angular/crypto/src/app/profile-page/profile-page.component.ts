@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { FormBuilder,FormControl,FormGroup } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 
 export interface Wallets {
@@ -38,7 +39,7 @@ export class ProfilePageComponent implements OnInit {
   transactionsFilter:Transactions[]=[];
   updateForm:FormGroup
   isSentTransactionsView:boolean=true;
-  constructor(public authService:AuthService,private http:HttpClient,private router:Router,private formBuilder:FormBuilder,) {
+  constructor(public authService:AuthService,private http:HttpClient,private router:Router,private formBuilder:FormBuilder,private toastrService:ToastrService) {
     this.updateForm = this.formBuilder.group( {
       username:new FormControl(''),
       password:new FormControl(''),
@@ -55,6 +56,15 @@ export class ProfilePageComponent implements OnInit {
         this.getTransactions(this.public_address);
       }
     });
+    const messageSuccess = localStorage.getItem('toastrMessage');
+    if (messageSuccess) {
+      this.toastrService.success(messageSuccess, 'Success', {
+        timeOut: 3000, 
+        closeButton: true, 
+        progressBar: true, 
+      });
+      localStorage.removeItem('toastrMessage');
+    }
   }
   getWalletContents(public_address:string){
     this.http.get<any>(`https://tradingbackend.vercel.app/transfer/getWallet?public_address=${public_address}`)
@@ -107,6 +117,8 @@ export class ProfilePageComponent implements OnInit {
     
       this.http.put(`https://tradingbackend.vercel.app/api/user/update/${public_address}`, requestBody, { responseType: 'text' })
         .subscribe(() => {
+          const message = 'User updated successfully!';
+          localStorage.setItem('toastrMessage',message);
           location.reload();
           this.authService.updateUsername(requestBody.username);
         });

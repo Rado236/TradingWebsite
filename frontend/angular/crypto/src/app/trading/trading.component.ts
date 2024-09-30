@@ -9,6 +9,7 @@ import {FormBuilder, FormControl, FormControlName, FormGroup} from "@angular/for
 import {AuthService} from "../services/authenication.service";
 import formatters from "chart.js/dist/core/core.ticks";
 import { Crypto } from '../homepage/homepage.component';
+import { ToastrService } from 'ngx-toastr';
 
 export interface UserCrypto {
   crypto_name:string;
@@ -49,7 +50,7 @@ export class TradingComponent implements OnInit {
   userAddress:string='';
 
 
-  constructor(private http:HttpClient,private builder:FormBuilder,private authService: AuthService) {
+  constructor(private http:HttpClient,private builder:FormBuilder,private authService: AuthService,private toastrService:ToastrService) {
     this.authService.currentUser$.subscribe(user => {
       if (user) {
         this.order.public_address = user.public_address;
@@ -92,6 +93,15 @@ export class TradingComponent implements OnInit {
         this.crypto_amount=0;
       }
     })
+    const messageSuccess = localStorage.getItem('toastrMessage');
+    if (messageSuccess) {
+      this.toastrService.success(messageSuccess, 'Success', {
+        timeOut: 3000, 
+        closeButton: true, 
+        progressBar: true, 
+      });
+      localStorage.removeItem('toastrMessage');
+    }
     
   }
   submitOrder(){
@@ -100,7 +110,10 @@ export class TradingComponent implements OnInit {
     this.order.crypto_name = this.orderForm.get('crypto_name')?.value;
     this.order.amount = this.orderForm.get('amount')?.value;
     if(this.order.amount===0 || this.order.amount === null){
-      alert("Please enter valid amount and try again!")
+      this.isLoading=false;
+      this.toastrService.error(`Enter valid amount and try again!`,'Error',{timeOut:3000,closeButton: true, 
+        progressBar: true,})
+      this.isLoading=false;
       return
     }
     //The order object has been filled, we pass it as argument since the controller requires the same object(check priceController.ts)
@@ -110,12 +123,15 @@ export class TradingComponent implements OnInit {
         console.log(response["status"])
         if(response["status"]==="success"){//checking what is the message we receive from the controller
           this.isLoading=false;
-          alert("Successful Transaction")
+          const messageSuccess = `Successfully ${this.orderForm.get('operation')?.value ==='Buy'? 'bought' : 'sold '}  ${this.order.amount} ${this.order.crypto_name}`;
+          localStorage.setItem('toastrMessage', messageSuccess);
           location.reload()
         }
         else{
           this.isLoading=false;
-          alert("Transaction Failed! Please try again!")
+          this.toastrService.error(`Transaction Failed! Please try again!`,'Error',{timeOut:3000,closeButton: true, 
+            progressBar: true,})
+          this.isLoading=false;
         }
       })
   }
@@ -159,7 +175,7 @@ export class TradingComponent implements OnInit {
   }
 
   getWalletContents(public_address:string){
-    this.http.get<any>(`https://tradingbackend.vercel.app/getWallet?public_address=${public_address}`)
+    this.http.get<any>(`https://tradingbackend.vercel.app/transfer/getWallet?public_address=${public_address}`)
       .subscribe((data:any)=>{
         this.userCrypto = data
       });
