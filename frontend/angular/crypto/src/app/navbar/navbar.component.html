@@ -16,8 +16,8 @@
         </span>
         <button class="btn-logout" (click)="logout()" *ngIf="(authService.currentUser$ | async) as currentUser">{{'logout' | translate}}</button>
         <select class="language-form" name="" id="" (change)="changeLanguage($event)">
-          <option [selected]="lang==='en'" value="en">EN(English)</option>
-          <option [selected]="lang==='bg'" value="bg">BG(Bulgarian)</option>
+          <option [selected]="lang==='en'" value="en">EN (English)</option>
+          <option [selected]="lang==='bg'" value="bg">BG( Bulgarian)</option>
         </select>
       </div>      
 

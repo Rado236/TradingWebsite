@@ -11,6 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./navbar.component.scss']
 })
 
+
 export class NavbarComponent implements OnInit{
   wallets:Wallets[]=[];
   public_address:string='';

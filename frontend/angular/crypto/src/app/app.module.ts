@@ -14,14 +14,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TradingComponent } from './trading/trading.component';
 import { FooterComponent } from './footer/footer.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
-import { NgChartsModule } from 'ng2-charts';
-import 'chart.js';
 import { DepositComponent } from './deposit/deposit.component';
 import { SendcryptoComponent } from './sendcrypto/sendcrypto.component';
 import { WithdrawComponent } from './withdraw/withdraw.component';
 import { ToastrModule } from 'ngx-toastr';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
 
 
 export function HttpLoaderFactory(http:HttpClient){
@@ -49,7 +48,6 @@ export function HttpLoaderFactory(http:HttpClient){
     NgbModule,
     HttpClientModule,
     FormsModule,
-    NgChartsModule,
     ReactiveFormsModule,
     BrowserModule,
     ToastrModule.forRoot(),
