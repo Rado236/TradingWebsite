@@ -30,6 +30,21 @@ justify-content: center;
 align-items: center;
 }
 
+.bg h1,h3{
+  animation: text 2s ease-in-out;
+}
+
+@keyframes text{
+  from{
+    opacity: 0;
+    font-size: 0;
+  }
+  to{
+    opacity: 100;
+    font-size: 100;
+  }
+}
+
 @keyframes fadeInUp {
   0% {
       opacity: 0; /* Fully transparent */
