@@ -1,9 +1,9 @@
 <app-navbar></app-navbar>
     <div class="container-fluid" class="bg">
         <div class="bg-content">
-            <h1>Get ahead in the crypto game.</h1>
-            <h3>Trade with our platform.</h3><br>
-            <button class="logingbutton" routerLink="{{authService.isLoggedIn() ? '/trading' : '/registration' }}">Get Started</button>
+            <h1>{{'get_ahead_in_the_crypto_game' | translate}}.</h1>
+            <h3>{{'trade_with_our_platform' | translate}}.</h3><br>
+            <button class="logingbutton" routerLink="{{authService.isLoggedIn() ? '/trading' : '/registration' }}">{{'get_started' | translate}}</button>
         </div>
     </div>
 
@@ -12,7 +12,7 @@
 
         <section class="card-section">
           <div class="container">
-            <h2 class="section-title">Why to choose us?</h2>
+            <h2 class="section-title">{{'why_to_choose_us' | translate}}</h2>
             <div class="row">
               <div class="col-md-4">
                 <div class="card">
@@ -77,9 +77,9 @@
   <table class="crypto-table">
     <thead>
       <tr>
-        <th>Cryptocurrency</th>
-        <th>Value (USDT)</th>
-        <th>Trade</th>
+        <th>{{'cryptocurrency' | translate}}</th>
+        <th>{{'value' | translate}} (USDT)</th>
+        <th>{{'trade' | translate}}</th>
       </tr>
     </thead>
     <tbody>
@@ -89,7 +89,7 @@
         </td>
         <td class="crypto-value">{{ crypto.value_usdt }} US</td>
         <td>
-          <button routerLink="/trading" class="trade-button">Trade</button>
+          <button routerLink="/trading" class="trade-button">{{'trade' | translate}}</button>
         </td>
       </tr>
     </tbody>

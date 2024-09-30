@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from './services/authenication.service';
 import { Wallets } from './profile-page/profile-page.component';
 import { HttpClient } from '@angular/common/http';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,9 @@ import { HttpClient } from '@angular/common/http';
 export class AppComponent {
   title = 'crypto';
   wallets:Wallets[]=[];
-  //currentUser: string | null = null;
-  constructor(private authService:AuthService){}
+  constructor(private authService:AuthService,private translateService:TranslateService){
+    this.translateService.defaultLang='en';
+    this.translateService.use(localStorage.getItem('lang') || 'en');
+  }
 
 }

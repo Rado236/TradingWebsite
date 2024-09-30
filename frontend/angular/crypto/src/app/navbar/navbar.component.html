@@ -3,18 +3,22 @@
     <div class="navbar">
       <div class="navbar-left">
         <a routerLink="/"><img class="logo" src="/assets/logo.png" height="64px" width="64px"></a>
-        <a routerLink="/trading">Trade</a>
-        <a routerLink="/deposit">Deposit</a>
-        <a routerLink="/sendcrypto">Send crypto</a>
+        <a routerLink="/trading">{{'trade' | translate}}</a>
+        <a routerLink="/deposit">{{'deposit' | translate}}</a>
+        <a routerLink="/sendcrypto">{{'send_crypto' | translate}}</a>
       </div>
       <div class="navbar-right">
         <button class="btn-login" *ngIf="!(authService.currentUser$ | async)" routerLink="/login">Log In</button>
         <button *ngIf="!(authService.currentUser$ | async)" class="btn-register" routerLink="/registration">Register</button>
-        <span *ngIf="(authService.currentUser$ | async) as currentUser" class="welcome">Welcome:
+        <span *ngIf="(authService.currentUser$ | async) as currentUser" class="welcome">{{'welcome' | translate}}:
           <a routerLink="/profile">{{ currentUser?.username }}</a>
-          <h6>Balance: {{deposit.toFixed(2)}} $</h6>
+          <h6>{{'balance' | translate}}: {{deposit.toFixed(2)}} $</h6>
         </span>
-        <button class="btn-logout" (click)="logout()" *ngIf="(authService.currentUser$ | async) as currentUser">Logout</button>
+        <button class="btn-logout" (click)="logout()" *ngIf="(authService.currentUser$ | async) as currentUser">{{'logout' | translate}}</button>
+        <select class="language-form" name="" id="" (change)="changeLanguage($event)">
+          <option [selected]="lang==='en'" value="en">EN(English)</option>
+          <option [selected]="lang==='bg'" value="bg">BG(Bulgarian)</option>
+        </select>
       </div>      
 
     </div>

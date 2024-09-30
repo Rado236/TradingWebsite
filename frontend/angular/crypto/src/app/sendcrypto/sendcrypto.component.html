@@ -8,18 +8,18 @@
 <div class="container">
     <div class="send-crypto-page">
       <div class="send-crypto-header">
-        <h2>Send crypto</h2>
+        <h2>{{'send_crypto' | translate}}</h2>
       </div>
       <form [formGroup]="transactionForm" class="crypto-send-form">
-        <label for="crypto-amount">Crypto amount:</label>
+        <label for="crypto-amount">{{'crypto_amount' | translate}}:</label>
         <div class="input-group">
           <input formControlName="amount" type="number" class="form-control" id="crypto-amount" name="amount" required>
         </div>
-        <label  for="public_address_reciever">Reciever public address:</label>
+        <label  for="public_address_reciever">{{'reciever_address' | translate}}:</label>
         <div class="input-group">
           <input formControlName="public_address_reciever" type="text" class="form-control" id="public_address_reciever" name="public_address_reciever" required>
         </div>
-        <label for="crypto-type">Crypto Type</label>
+        <label for="crypto-type">{{'crypto_type' | translate}}</label>
             <select formControlName="crypto_name" id="crypto-type" name="crypto" class="form-control">
                 <option value="BTC">BTC</option>
                 <option value="ETH">ETH</option>
@@ -30,7 +30,7 @@
               <p class="currentCryptoInfo" *ngIf="transactionForm.get('crypto_name')?.value !== null && transactionForm.get('crypto_name')?.value !== ''">
                 You have: {{crypto_amount}} {{ selectedCrypto }}</p>
               </div>
-        <button class="btn btn-primary mt-3" (click)="sendCrypto()">Send crypto</button>
+        <button class="btn btn-primary mt-3" (click)="sendCrypto()">{{'send_crypto' | translate}}</button>
       </form>
     </div>
   </div>

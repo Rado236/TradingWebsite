@@ -9,7 +9,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NotfoundComponent } from './notfound/notfound.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TradingComponent } from './trading/trading.component';
 import { FooterComponent } from './footer/footer.component';
@@ -20,8 +20,13 @@ import { DepositComponent } from './deposit/deposit.component';
 import { SendcryptoComponent } from './sendcrypto/sendcrypto.component';
 import { WithdrawComponent } from './withdraw/withdraw.component';
 import { ToastrModule } from 'ngx-toastr';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 
+export function HttpLoaderFactory(http:HttpClient){
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -47,11 +52,17 @@ import { ToastrModule } from 'ngx-toastr';
     NgChartsModule,
     ReactiveFormsModule,
     BrowserModule,
-    ToastrModule.forRoot({
-      timeOut:3000
-    })
+    ToastrModule.forRoot(),
+    TranslateModule.forRoot({
+      loader:{
+        provide:TranslateLoader,
+        useFactory:HttpLoaderFactory,
+        deps:[HttpClient]
+      }
+    }
+    )
   ],
-  providers: [],
+  providers: [HttpClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

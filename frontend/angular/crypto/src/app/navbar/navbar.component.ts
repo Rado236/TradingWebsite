@@ -2,6 +2,7 @@ import { Component,Input,OnInit  } from '@angular/core';
 import { AuthService } from '../services/authenication.service';
 import { Wallets } from '../profile-page/profile-page.component';
 import { HttpClient } from '@angular/common/http';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -15,14 +16,10 @@ export class NavbarComponent implements OnInit{
   public_address:string='';
   username:string='';
   deposit:number=0.00;
+  lang:string = '';
 
-  
-
-  constructor(public authService: AuthService,private http:HttpClient) {
+  constructor(public authService: AuthService,private http:HttpClient,private translateService:TranslateService) {
   }
-
-
-
   ngOnInit(){
       this.authService.currentUser$.subscribe(user => {
         if (user) {
@@ -33,6 +30,7 @@ export class NavbarComponent implements OnInit{
           this.getWalletContents(this.public_address);
         }
       });
+      this.lang=localStorage.getItem('lang') || 'en';
   }
 
     getWalletContents(public_address:string){
@@ -54,6 +52,11 @@ export class NavbarComponent implements OnInit{
     this.authService.logout();
   }
 
+  changeLanguage(lang:any){
+    const selectedLang=lang.target.value;
+    localStorage.setItem('lang',selectedLang);
+    this.translateService.use(selectedLang);
+  }
 
 }
 

@@ -7,18 +7,18 @@
   </div>
 <div class="crypto-container">
   <form [formGroup]="orderForm" (ngSubmit)="submitOrder()" class="crypto-buy-sell">
-    <h3 class="crypto-header">{{ selectedOrder }} Crypto</h3>
+    <h3 class="crypto-header">{{ selectedOrder }} {{'crypto' | translate}} </h3>
 
     <div class="form-group">
-      <label>Select operation</label>
+      <label>{{'select_operation' | translate}}</label>
       <select formControlName="operation" class="form-control">
-        <option value="buy">Buy</option>
-        <option value="sell">Sell</option>
+        <option value="buy">{{'buy' | translate}}</option>
+        <option value="sell">{{'sell' | translate}}</option>
       </select>
     </div>
 
     <div class="form-group">
-      <label for="crypto-type">Crypto Type</label>
+      <label for="crypto-type">{{'crypto_type' | translate}}</label>
       <select formControlName="crypto_name" id="crypto-type" name="crypto" class="form-control">
         <option value="BTC">BTC</option>
         <option value="ETH">ETH</option>
@@ -28,7 +28,7 @@
     </div>
 
     <div class="form-group">
-      <label for="crypto-amount">Crypto Amount</label>
+      <label for="crypto-amount">{{'crypto_amount' | translate}}</label>
       <input id="crypto-amount" type="number" formControlName="amount" placeholder="Enter amount" class="form-control">
     </div>
     <div>
@@ -40,7 +40,7 @@
           You have: {{ crypto_amount | number: '1.2-10'}} {{ selectedCrypto }} <a class="sell-all-button" (click)="sellAll()" >Sell all?</a></p>
         </div>
     <div class="form-group">
-      <label for="fiat-type">Fiat Type : USD</label>
+      <label for="fiat-type">{{'fiat_type' | translate}}: USD</label>
       <select id="fiat-type" class="form-control">
         <option value="usd">USD</option>
       </select>

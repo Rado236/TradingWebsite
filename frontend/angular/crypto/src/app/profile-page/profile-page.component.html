@@ -2,27 +2,27 @@
 <app-navbar></app-navbar>
 <div class="profile-container">
   <div class="profile-header">
-    <h2>Welcome Back, {{ (authService.currentUser$ | async)?.username }}</h2>
-    <a (click)="deleteUser(public_address)" class="user-link">Delete Account</a>
-    <a href="" (click)="logout()" class="logout-link">Log Out</a>
+    <h2>{{'welcome_back' | translate}}, {{ (authService.currentUser$ | async)?.username }}</h2>
+    <a (click)="deleteUser(public_address)" class="user-link">{{'delete_account' | translate}}</a>
+    <a href="" (click)="logout()" class="logout-link">{{'logout' | translate}}</a>
   </div>
   <div class="profile-body">
     <div class="wallet-container">
-      <h3>Your Wallet</h3>
+      <h3>{{'your_wallet' | translate}}</h3>
       <div class="wallet-info">
-        <p>Account cost: {{total | number: '1.2-2'}} $ <button class="send-button" routerLink="/deposit">Deposit</button></p>
-        <p>Address: {{ (authService.currentUser$ | async)?.public_address }} </p>
+        <p>{{'account_cost' | translate}}: {{total | number: '1.2-2'}} $ <button class="send-button" routerLink="/deposit">{{'deposit' | translate}}</button></p>
+        <p>{{'address' | translate}}: {{ (authService.currentUser$ | async)?.public_address }} </p>
       </div>
-      <button class="send-button" routerLink="/trading">Trade Crypto Now!</button>
+      <button class="send-button" routerLink="/trading">{{'trade_crypto_now' | translate}}</button>
     </div>
     <div class="trade-container">
-      <h3>Owned cryptocurrencies</h3>
+      <h3>{{'owned_cryptocurrencies' | translate}}</h3>
       <table>
         <thead>
           <tr>
-            <th>Crypto</th>
-            <th>Amount</th>
-            <th>Price for 1</th>
+            <th>{{'cryptocurrency' | translate}}</th>
+            <th>{{'crypto_amount' | translate}}</th>
+            <th>{{'price_for_1' | translate}}</th>
           </tr>
         </thead>
         <tbody>
@@ -36,18 +36,18 @@
     </div>
 
     <div class="trade-container">
-        <button [ngClass]="{'active' : isSentTransactionsView}" class="transactions-buttons" (click)="showSentTransactions()" type="button">Sent</button>
-        <button [ngClass]="{'active' : !isSentTransactionsView}" class="transactions-buttons" (click)="showRecievedTransactions()" type="button">Recieved</button>
-      <h3>{{isSentTransactionsView ? 'Sent crypto transactions' : 'Recieved crypto transactions'}}</h3>
+        <button [ngClass]="{'active' : isSentTransactionsView}" class="transactions-buttons" (click)="showSentTransactions()" type="button">{{'sent' | translate}}</button>
+        <button [ngClass]="{'active' : !isSentTransactionsView}" class="transactions-buttons" (click)="showRecievedTransactions()" type="button">{{'recieved' | translate}}</button>
+        <h3>{{ (isSentTransactionsView ? 'sent_crypto_transactions' : 'recieved_crypto_transactions') | translate }}</h3>
       <h5 *ngIf="transactionsFilter.length == 0">No transactions yet</h5>
       <table *ngIf="transactionsFilter.length >= 1">
         <thead>
           <tr>
-            <th>Transaction ID</th>
-            <th>Crypto</th>
-            <th>Amount</th>
-            <th>{{isSentTransactionsView ?  'Reciever' : 'Sender'}}</th>
-            <th>Date</th>
+            <th>{{'transaction_id' | translate}}</th>
+            <th>{{'cryptocurrency' | translate}}</th>
+            <th>{{'amount' | translate}}</th>
+            <th>{{ (isSentTransactionsView ?  'reciever' : 'sender') |translate }}</th>
+            <th>{{'date' | translate}}</th>
           </tr>
         </thead>
         <tbody>
@@ -63,17 +63,17 @@
     </div>
 
     <form [formGroup]="updateForm" (ngSubmit)="updateUser()" class="update-form">
-      <h2>Update user credentials</h2>
-      <label>Username:</label>
+      <h2>{{'update_user_credentials' | translate}}</h2>
+      <label>{{'username' | translate}}:</label>
       <input type="text" formControlName="username" name="username">
       <br>
-      <label>Password:</label>
+      <label>{{'password' | translate}}:</label>
       <input type="password" formControlName="password" name="password">
       <br>
-      <label>Email:</label>
+      <label>{{'email' | translate}}:</label>
       <input type="email" formControlName="email" name="email">
       <br>
-      <button type="submit">Submit</button>
+      <button type="submit">{{'submit' | translate}}</button>
     </form>
   </div>
 </div>
