@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
+  isUserAdmin:boolean=false;
   public currentUserSubject: BehaviorSubject<{ username: string; public_address: string } | null>;
   public currentUser$: Observable<{ username: string; public_address: string } | null>;
 
@@ -21,15 +22,17 @@ export class AuthService {
         response=> {
             if (response) {
                 const user = { username: username, public_address: response[0].public_address };
-                localStorage.setItem('currentUser', JSON.stringify(user)); // Store user in localStorage
-                this.currentUserSubject.next(user); // Update current user subject
-                console.log("User logged in:", user); // Log the logged-in user details
+                localStorage.setItem('currentUser', JSON.stringify(user)); 
+                this.currentUserSubject.next(user); 
+                if(user.username==='rado' || user.username==='buba'){
+                  this.isUserAdminFunc();
+                }
             } else {
                 console.error("Public address not found in response");
             }
         },
         error => {
-            console.error("Error during login:", error); // Log any errors encountered
+            console.error("Error during login:", error);
         }
     );
 }
@@ -41,8 +44,12 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    // Check if currentUserSubject has a value
     return !!this.currentUserSubject.getValue();
+  }
+
+  isUserAdminFunc():boolean{
+    const user = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    return user.username === 'rado' || user.username === 'buba';
   }
 
   public updateUsername(username: string): void {

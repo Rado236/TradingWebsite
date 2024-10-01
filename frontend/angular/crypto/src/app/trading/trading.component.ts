@@ -10,6 +10,7 @@ import {AuthService} from "../services/authenication.service";
 import formatters from "chart.js/dist/core/core.ticks";
 import { Crypto } from '../homepage/homepage.component';
 import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 
 export interface UserCrypto {
   crypto_name:string;
@@ -41,7 +42,7 @@ export class TradingComponent implements OnInit {
 
   crypto_amount:number=0;
 
-  selectedOrder:string = "Buy/Sell";//This will gold the title above the form
+  selectedOrder:string = "Buy/Sell"//This will gold the title above the form
 
   private subscriptions: Subscription = new Subscription();
   isLoading:boolean=false;
@@ -50,7 +51,7 @@ export class TradingComponent implements OnInit {
   userAddress:string='';
 
 
-  constructor(private http:HttpClient,private builder:FormBuilder,private authService: AuthService,private toastrService:ToastrService) {
+  constructor(private http:HttpClient,private builder:FormBuilder,private authService: AuthService,private toastrService:ToastrService,private translate:TranslateService) {
     this.authService.currentUser$.subscribe(user => {
       if (user) {
         this.order.public_address = user.public_address;
@@ -63,7 +64,6 @@ export class TradingComponent implements OnInit {
       amount:new FormControl(null),
       operation:new FormControl("")
     })
-
   }
   ngOnInit(): void {
     //tracking any change in the order type
@@ -123,7 +123,7 @@ export class TradingComponent implements OnInit {
         console.log(response["status"])
         if(response["status"]==="success"){//checking what is the message we receive from the controller
           this.isLoading=false;
-          const messageSuccess = `Successfully ${this.orderForm.get('operation')?.value ==='Buy'? 'bought' : 'sold '}  ${this.order.amount} ${this.order.crypto_name}`;
+          const messageSuccess = `Successfully ${this.orderForm.get('operation')?.value ==='buy'? 'bought' : 'sold '}  ${this.order.amount} ${this.order.crypto_name}`;
           localStorage.setItem('toastrMessage', messageSuccess);
           location.reload()
         }
@@ -189,12 +189,12 @@ export class TradingComponent implements OnInit {
     get buttonText():string{
       const operation=this.orderForm.get('operation')?.value;
       if(operation==='sell'){
-        return `Sell ${this.selectedCrypto}`
+        return `${this.translate.instant('sell')} ${this.selectedCrypto}`
       }
       else if(operation==='buy'){
-        return `Buy ${this.selectedCrypto}`
+        return `${this.translate.instant('buy')} ${this.selectedCrypto}`
       }
-      return "Choose order"
+      return `${this.translate.instant('choose_operation')}`
     }
 }
 

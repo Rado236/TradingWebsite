@@ -43,5 +43,16 @@
     "delete_account":"Delete account",
     "your_wallet": "Your wallet",
     "crypto": "crypto",
-    "amount": "Quantity"
+    "amount": "Quantity",
+    "easy_and_fast_transactions": "Easy and Fast Transactions",
+    "secure_and_trusted": "Secure and Trusted",
+    "24/7_support" : "24/7 Support",
+    "easy_and_fast_transactions_p": "Our platform offers quick and easy transactions so you can buy and sell your favorite cryptocurrencies in no time.",
+    "secure_and_trusted_p": "We take security seriously and have implemented the latest measures to ensure the safety of your funds and information.",
+    "24/7_support_p" : "Our dedicated support team is available 24/7 to assist you with any questions or concerns you may have.",
+    "volume_traded": "Quarterly volume traded",
+    "countries_supported": "Countries supported",
+    "verified_users" : "Verified users",
+    "buy-sell": "Buy/Sell",
+    "home" : "Home"
 }

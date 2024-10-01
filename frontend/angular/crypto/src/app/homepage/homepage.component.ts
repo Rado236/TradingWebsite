@@ -1,7 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component,HostListener,Inject,OnInit } from '@angular/core';
-
-import {interval, subscribeOn} from 'rxjs';
+import { AfterViewInit, Component,ElementRef,HostListener,Inject,OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../services/authenication.service';
 
 export interface Crypto{
@@ -14,16 +12,17 @@ export interface Crypto{
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.scss'],
 })
-export class HomepageComponent implements OnInit{
+export class HomepageComponent implements OnInit, AfterViewInit{
+  @ViewChild('statsSection') statSection!: ElementRef;
   cryptos:Crypto[] = []
   stat1=0;
   stat2=0;
   stat3=0;
-
+  animated = false;
   private stat1target=145;
   private stat2target=100;
   private stat3target=110;
-  private duration=3000;
+  private duration=2000;
   constructor(private http:HttpClient,public authService:AuthService){
 
 }
@@ -31,14 +30,26 @@ export class HomepageComponent implements OnInit{
     this.http.get("https://tradingbackend.vercel.app/transfer/cryptos")
       .subscribe((data:any)=>{
         this.cryptos = data
-        console.log(this.cryptos)
       })
     //Here we get all crypto data from the prices table into an array(called cryptos) and loop though the array to visualize all the current values
   }
   
   ngOnInit() {
     this.getCryptos()
-    this.counter();
+  }
+
+  ngAfterViewInit(): void {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !this.animated) {
+          this.counter();
+          this.animated = true;
+        }
+      });
+    }, {
+      threshold: 0.3 
+    });
+    observer.observe(this.statSection.nativeElement);
   }
   counter(){
     const startTime=performance.now();

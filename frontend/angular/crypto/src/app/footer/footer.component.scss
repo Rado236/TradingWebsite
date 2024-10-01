@@ -56,4 +56,15 @@ footer {
   .social-links li a:hover {
     color: orange;
   }
+
+  @media (max-width: 768px) {
+  .row{
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+  .col-md-4{
+    margin-bottom: 15px;
+  }
+  }
   

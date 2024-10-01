@@ -18,6 +18,7 @@ export class NavbarComponent implements OnInit{
   username:string='';
   deposit:number=0.00;
   lang:string = '';
+  isMenuOpen:boolean=false;
 
   constructor(public authService: AuthService,private http:HttpClient,private translateService:TranslateService) {
   }
@@ -26,8 +27,6 @@ export class NavbarComponent implements OnInit{
         if (user) {
           this.username=user.username;
           this.public_address=user.public_address;
-          console.log("Pub",this.public_address)
-          console.log(user)
           this.getWalletContents(this.public_address);
         }
       });
@@ -39,7 +38,6 @@ export class NavbarComponent implements OnInit{
     this.http.get<any>(`https://tradingbackend.vercel.app/transfer/getWallet?public_address=${string_pub}`)
       .subscribe((data:any)=>{
         this.wallets = data
-        console.log(this.wallets);
         for (const wallet of this.wallets) {
           if (wallet.crypto_id===4) { 
             this.deposit=wallet.amount
@@ -57,6 +55,11 @@ export class NavbarComponent implements OnInit{
     const selectedLang=lang.target.value;
     localStorage.setItem('lang',selectedLang);
     this.translateService.use(selectedLang);
+  }
+
+  //for mobile
+  toggleMenu(){
+    this.isMenuOpen=!this.isMenuOpen;
   }
 
 }

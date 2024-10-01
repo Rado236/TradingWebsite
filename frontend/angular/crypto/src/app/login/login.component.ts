@@ -1,7 +1,8 @@
-import { Component} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from "@angular/router"
 import { AuthService } from '../services/authenication.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -9,14 +10,26 @@ import { AuthService } from '../services/authenication.service';
   styleUrls: ['./login.component.scss']
 })
 
-export class LoginComponent  {
+export class LoginComponent implements OnInit {
   username: string = '';
   password: string = '';
   isLoading:boolean=false;
 
-  constructor(private http: HttpClient,private authService:AuthService,private router:Router) { 
+  constructor(private http: HttpClient,private authService:AuthService,private router:Router,private toastrService:ToastrService) { 
     
   }
+
+  ngOnInit(): void {
+    const messageSuccess = localStorage.getItem('toastrMessage');
+    if (messageSuccess) {
+      this.toastrService.success(messageSuccess, 'Success', {
+        timeOut: 3000, 
+        closeButton: true, 
+        progressBar: true, 
+      });
+      localStorage.removeItem('toastrMessage');
+  }
+}
 
   onSubmit() {
     this.isLoading=true;
@@ -25,18 +38,20 @@ export class LoginComponent  {
       .subscribe((response:any) => {
         if(response.message==='User exists') {
         // login successful
-          console.log("mai stana");
           this.authService.login(this.username);
           this.isLoading=false;
           this.router.navigate(['/']);
         }
         else {
           this.isLoading=false;
-          alert(response.message);
+          this.toastrService.error(response.message, 'Error', {
+            timeOut: 3000, 
+            closeButton: true, 
+            progressBar: true, 
+          });
         }
       }, error => {
         this.isLoading=false;
-        // login failed
         console.error(error);
       });
   }

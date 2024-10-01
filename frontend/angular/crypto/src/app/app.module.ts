@@ -20,6 +20,7 @@ import { WithdrawComponent } from './withdraw/withdraw.component';
 import { ToastrModule } from 'ngx-toastr';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { AdminpanelComponent } from './adminpanel/adminpanel.component';
 
 
 
@@ -40,7 +41,8 @@ export function HttpLoaderFactory(http:HttpClient){
     ProfilePageComponent,
     DepositComponent,
     SendcryptoComponent,
-    WithdrawComponent
+    WithdrawComponent,
+    AdminpanelComponent
   ],
   imports: [
     BrowserModule,

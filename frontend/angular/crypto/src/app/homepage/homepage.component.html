@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-    <div class="container-fluid" class="bg">
+    <div class="bg">
         <div class="bg-content">
             <h1>{{'get_ahead_in_the_crypto_game' | translate}}.</h1>
             <h3>{{'trade_with_our_platform' | translate}}.</h3><br>
@@ -20,8 +20,8 @@
                     <i class="fas fa-shield-alt"></i>
                   </div>
                   <div class="card-body">
-                    <h3 class="card-title">Secure and Trusted</h3>
-                    <p class="card-text">We take security seriously and have implemented the latest measures to ensure the safety of your funds and information.</p>
+                    <h3 class="card-title">{{'secure_and_trusted' | translate}}</h3>
+                    <p class="card-text">{{'secure_and_trusted_p' | translate}}</p>
                   </div>
                 </div>
               </div>
@@ -31,8 +31,8 @@
                     <i class="fas fa-credit-card"></i>
                   </div>
                   <div class="card-body">
-                    <h3 class="card-title">Easy and Fast Transactions</h3>
-                    <p class="card-text">Our platform offers quick and easy transactions so you can buy and sell your favorite cryptocurrencies in no time.</p>
+                    <h3 class="card-title">{{'easy_and_fast_transactions' | translate}}</h3>
+                    <p class="card-text">{{'easy_and_fast_transactions_p' | translate}}</p>
                   </div>
                 </div>
               </div>
@@ -42,8 +42,8 @@
                     <i class="fas fa-headset"></i>
                   </div>
                   <div class="card-body">
-                    <h3 class="card-title">24/7 Support</h3>
-                    <p class="card-text">Our dedicated support team is available 24/7 to assist you with any questions or concerns you may have.</p>
+                    <h3 class="card-title">{{'24/7_support' | translate}}</h3>
+                    <p class="card-text">{{'24/7_support_p' | translate}}</p>
                   </div>
                 </div>
               </div>
@@ -55,21 +55,21 @@
 
         <!--Stats-->
 
-        <section class="stats-section">
+        <section #statsSection class="stats-section">
           <div class="stats-wrapper">
             <div class="stats-stat">
               <div class="stats-number">${{stat1}}B</div>
-              <div class="stats-description">Quarterly volume traded</div>
+              <div class="stats-description">{{'volume_traded' | translate}}</div>
             </div>
             <div class="stats-stat">
               <div class="stats-number">{{stat2}}+</div>
-              <div class="stats-description">Countries supported</div>
+              <div class="stats-description">{{'countries_supported' | translate}}</div>
             </div>
             <div class="stats-stat">
               <div class="stats-number">{{stat3}}M+</div>
-              <div class="stats-description">Verified users</div>
+              <div class="stats-description">{{'verified_users' | translate}}</div>
             </div>
-          </div>
+            </div>
         </section>
 
 

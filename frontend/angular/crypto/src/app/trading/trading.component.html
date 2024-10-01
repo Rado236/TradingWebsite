@@ -7,8 +7,7 @@
   </div>
 <div class="crypto-container">
   <form [formGroup]="orderForm" (ngSubmit)="submitOrder()" class="crypto-buy-sell">
-    <h3 class="crypto-header">{{ selectedOrder }} {{'crypto' | translate}} </h3>
-
+    <h3 class="crypto-header">{{selectedOrder}} {{'crypto' | translate}} </h3>
     <div class="form-group">
       <label>{{'select_operation' | translate}}</label>
       <select formControlName="operation" class="form-control">

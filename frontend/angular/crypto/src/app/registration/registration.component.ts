@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class RegistrationComponent {
     password:string = '';
     email:string = '';
 
-  constructor(private http: HttpClient,private router:Router,private formBuilder:FormBuilder) {  
+  constructor(private http: HttpClient,private router:Router,private formBuilder:FormBuilder,private toastrService:ToastrService) {  
     this.registrationForm = this.formBuilder.group({
       username: ['',Validators.required],
       email: ['',Validators.required],
@@ -25,17 +26,25 @@ export class RegistrationComponent {
 
   onSubmit() {
     if(!this.registrationForm.valid) {
-      alert('Please fill all the fields!');
+      this.toastrService.error('Please fill all the fields!', 'Error', {
+        timeOut: 3000, 
+        closeButton: true, 
+        progressBar: true, 
+      });
       return;
     }
     else{// send login data to backend
       this.http.post('https://tradingbackend.vercel.app/api/user/register',{username:this.username, password:this.password,email:this.email},)
         .subscribe(() => {
-          alert("successfully registered user! You will be redirected to the homepage!");
-          this.router.navigate(['/']);
+          const messageSuccess = `successfully registered user! You will be redirected to the login page!`;
+          localStorage.setItem('toastrMessage', messageSuccess);
+          this.router.navigate(['/login']);
         }, error => {
-          // login failed
-          console.error(error);
+          this.toastrService.error(error, 'Error', {
+            timeOut: 3000, 
+            closeButton: true, 
+            progressBar: true, 
+          });
         });}
   }
 }

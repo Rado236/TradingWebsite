@@ -1,36 +1,44 @@
 nav {
   background-color: #282828;
   color: white;
-  display: flex;
-  justify-content: space-between;
+  display: block;
   padding: 0.5rem;
-  animation: slideIn 0.9s forwards;
 }
 
 @keyframes slideIn {
   from {
-      transform: translateY(-30px); /* Start from above */
-      opacity: 0; /* Start invisible */
+    transform: translateY(-30px); 
+    opacity: 0;
   }
   to {
-      transform: translateY(0); /* Move to original position */
-      opacity: 1; /* Fade in */
+    transform: translateY(0); 
+    opacity: 1; 
   }
 }
 
 .navbar {
-  align-items: center;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-between; 
   width: 100%;
+  position: relative;
+  z-index: 1000;
+  animation: slideIn 0.9s forwards;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  margin-left: auto; 
 }
 
 .logo {
-  margin-right: 3rem; 
+  margin-right: 3rem;
 }
-
-
 
 .navbar a {
   color: white;
@@ -40,13 +48,6 @@ nav {
   margin-right: 1rem;
   text-decoration: none;
   transition: background-color 0.3s ease;
-}
-
-
-
-.navbar-right {
-  align-items: center;
-  display: flex;
 }
 
 .btn-login,
@@ -72,6 +73,7 @@ nav {
 .welcome {
   margin-left: 1rem;
 }
+
 span a:hover {
   font-weight: bolder;
 }
@@ -90,4 +92,59 @@ span a:hover {
   color: white;
   padding: 10px; 
 }
+
+.hamburger{
+  display: none;
+  cursor: pointer;
+  flex-direction: column;
+  z-index: 15;
+}
+
+@media (max-width: 968px) {
+  .navbar-left {
+    display: none;
+    flex-direction: column;
+    background-color: #282828;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+  }
+
+  .navbar-left.open{
+    display: flex;
+    z-index: 9999;
+    animation: slideIn 0.4s ease;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+  .logo {
+    display: none;
+  }
+}
+
+@media (max-width: 458px) {
+  .navbar-right {
+    justify-content: flex-end; /* Align items to the right */
+    flex-direction: row; /* Ensure items are in a row */
+    font-size: 0.6rem; /* Decrease font size for better fit */
+  }
+
+  .btn-login,
+  .btn-register,
+  .btn-logout {
+    background-color: orange; 
+    border: none; 
+    border-radius: 2rem; 
+    color: white; 
+    cursor: pointer; 
+    font-size: 0.8rem; 
+    margin-left: 0.5rem; 
+    padding: 0.2rem 0.5rem; 
+  }
+  
+}
+
 
