@@ -1,24 +1,24 @@
 <body>
-  <a class="homepage-link" routerLink="/">Go to home page</a>
+  <a class="homepage-link" routerLink="/">{{ 'go_to_home_page' | translate}}</a>
   <div class="container">
     <div class="login-form">
-      <h2>Login</h2>
+      <h2>{{ 'login' | translate}} </h2>
       <form (ngSubmit)="onSubmit()">
         
-          <label for="username">Username:</label>
+          <label for="username">{{ 'username' | translate}}:</label>
           <input type="text" name="username" id="username" [(ngModel)]="username" required>
         
-          <label for="password">Password:</label>
+          <label for="password">{{ 'password' | translate}}:</label>
           <input type="password" id="password" name="password" [(ngModel)]="password" required>
         
-          <button type="submit">Login</button>
+          <button type="submit">{{ 'login' | translate}}</button>
         
       </form>
       <div *ngIf="isLoading" class="spinner">
       </div>
       <div class="login-form-text">
-        <p>Not registered?</p>
-        <a routerLink="/registration">Create an account</a>
+        <p>{{ 'not_registered' | translate}}</p>
+        <a routerLink="/registration">{{ 'create_an_account' | translate}}</a>
       </div>
     </div>
   </div>

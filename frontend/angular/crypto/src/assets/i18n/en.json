@@ -54,5 +54,12 @@
     "countries_supported": "Countries supported",
     "verified_users" : "Verified users",
     "buy-sell": "Buy/Sell",
-    "home" : "Home"
+    "home" : "Home",
+    "registration" : "Registration",
+    "register": "Register",
+    "already_have_account" : "Already have an account?",
+    "click_here_to_log_in" : "Click here to log in.",
+    "not_registered" : "Not registered?",
+    "create_an_account" : "Create an account",
+    "go_to_home_page" : "Go to home page"
 }

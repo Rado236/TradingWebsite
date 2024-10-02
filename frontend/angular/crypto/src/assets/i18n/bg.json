@@ -54,5 +54,12 @@
     "countries_supported": "Държави",
     "verified_users" : "Верифицирани потребители",
     "buy-sell": "Купи/Продай",
-    "home" : "Начало"
+    "home" : "Начало",
+    "registration" : "Регистрация",
+    "register": "Регистриране",
+    "already_have_account" : "Вече имате аканунт?",
+    "click_here_to_log_in" : "Натиснете тук, за да влезете.",
+    "not_registered" : "Нямате регистрация?",
+    "create_an_account" : "Създайте акаунт",
+    "go_to_home_page" : "Върнете се в началната страница"
 }

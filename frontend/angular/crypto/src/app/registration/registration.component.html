@@ -1,23 +1,23 @@
 <body>
-  <a class="homepage-link" routerLink="/">Go to home page</a>
+  <a class="homepage-link" routerLink="/">{{ 'go_to_home_page' | translate}}</a>
 <div class="container">
 <div class="reg-form">
-    <h2>Registration</h2>
+    <h2>{{ 'registration' | translate}}</h2>
   <form [formGroup]="registrationForm"  (ngSubmit)="onSubmit()">
-    <label for="exampleInputEUsername1">Username</label>
+    <label for="exampleInputEUsername1">{{ 'username' | translate}}</label>
     <input type="text" name="username" class="username-field" id="exampleInputUsername1" [(ngModel)]="username" placeholder="Enter username" formControlName="username">
     <small id="usernameHelp"></small>
 
-    <label for="exampleInputEmail1">Email address</label>
+    <label for="exampleInputEmail1">{{ 'email' | translate}}</label>
     <input type="email" class="email-field" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" [(ngModel)]="email" placeholder="Enter email" formControlName="email">
 
-    <label for="exampleInputPassword1">Password</label>
+    <label for="exampleInputPassword1">{{ 'password' | translate}}</label>
     <input name="password" type="password" class="password-field" id="exampleInputPassword1"  [(ngModel)]="password" placeholder="Password" formControlName="password">
 
     <div class="reg-form-text">
-      <button type="submit">Register</button>
-      <h3>Already have an account?</h3>
-      <a routerLink="/login">Click here to log in.</a>
+      <button type="submit">{{ 'register' | translate}}</button>
+      <h3>{{ 'already_have_account' | translate}}</h3>
+      <a routerLink="/login">{{ 'click_here_to_log_in' | translate}}</a>
     </div>
   </form>
 </div>
