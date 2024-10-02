@@ -2,7 +2,7 @@
   <div class="navbar">
     <div [class.active]="isMenuOpen" class="navbar-left"  [ngClass]="{'open': isMenuOpen}">
       <a routerLink="/"><img class="logo" src="/assets/logo.png" height="64px" width="64px"></a>
-      <a routerLink="/">{{'home' | translate}}</a>
+      <a class="home-router" routerLink="/">{{'home' | translate}}</a>
       <a routerLink="/trading">{{'trade' | translate}}</a>
       <a routerLink="/deposit">{{'deposit' | translate}}</a>
       <a routerLink="/sendcrypto">{{'send_crypto' | translate}}</a>

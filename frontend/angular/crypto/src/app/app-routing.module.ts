@@ -10,6 +10,7 @@ import { DepositComponent } from './deposit/deposit.component';
 import { AuthGuardGuard } from './services/auth-guard.guard';
 import { SendcryptoComponent } from './sendcrypto/sendcrypto.component';
 import { AdminpanelComponent } from './adminpanel/adminpanel.component';
+import { AdminGuardGuard } from './services/admin-guard.guard';
 
 const routes: Routes = [
   {path: "",component: HomepageComponent},
@@ -19,7 +20,7 @@ const routes: Routes = [
   {path: "trading", component: TradingComponent,canActivate:[AuthGuardGuard]},
   {path: "deposit", component: DepositComponent,canActivate:[AuthGuardGuard]},
   {path: "sendcrypto", component: SendcryptoComponent,canActivate:[AuthGuardGuard]},
-  {path: "adminpanel", component: AdminpanelComponent,canActivate:[AuthGuardGuard]},
+  {path: "adminpanel", component: AdminpanelComponent,canActivate:[AdminGuardGuard]},
   {path: "**", component: NotfoundComponent},
   
   

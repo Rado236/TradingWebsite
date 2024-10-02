@@ -100,7 +100,11 @@ span a:hover {
   z-index: 15;
 }
 
-@media (max-width: 968px) {
+.home-router{
+  display: none;
+}
+
+@media (max-width: 1000px) {
   .navbar-left {
     display: none;
     flex-direction: column;
@@ -109,6 +113,9 @@ span a:hover {
     top: 70px;
     left: 0;
     width: 100%;
+  }
+  .home-router{
+    display: flex;
   }
 
   .navbar-left.open{

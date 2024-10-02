@@ -170,7 +170,6 @@ export class TradingComponent implements OnInit {
     this.http.get("https://tradingbackend.vercel.app/transfer/cryptos")
       .subscribe((data:any)=>{
         this.cryptos = data
-        console.log(this.cryptos)
       })
   }
 
