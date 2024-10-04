@@ -1,5 +1,6 @@
 body {
   background-color: #E7E7E7;
+  overflow-y: scroll;
 }
 
 .crypto-container {
@@ -8,7 +9,6 @@ body {
   justify-content: center;
   align-items: center;
   height: 85vh;
-  margin: 10px 0;
   
 }
 
