@@ -1,10 +1,14 @@
-<app-navbar></app-navbar>
+<app-navbar (languageChanged)="onLanguageChange($event)"></app-navbar>
     <div class="bg">
         <div class="bg-content">
             <h1>{{'get_ahead_in_the_crypto_game' | translate}}.</h1>
             <h3>{{'trade_with_our_platform' | translate}}.</h3><br>
             <button class="logingbutton" routerLink="{{authService.isLoggedIn() ? '/trading' : '/registration' }}">{{'get_started' | translate}}</button>
         </div>
+        <div class="bg-content">
+          <video *ngIf="lang=='en'" #tradeVideoEn src="assets/Kiopektrader_english.mp4" muted autoplay controls>Trade</video>
+          <video *ngIf="lang=='bg'" #tradeVideoBg src="assets/bulgarian_kiopektrader.mp4" muted autoplay controls>Trade</video>
+      </div>
     </div>
 
 
@@ -79,7 +83,6 @@
       <tr>
         <th>{{'cryptocurrency' | translate}}</th>
         <th>{{'value' | translate}} (USDT)</th>
-        <th>{{'trade' | translate}}</th>
       </tr>
     </thead>
     <tbody>
@@ -88,9 +91,6 @@
           <div class="crypto-name">{{ crypto.crypto_name }}</div>
         </td>
         <td class="crypto-value">{{ crypto.value_usdt }} US</td>
-        <td>
-          <button routerLink="/trading" class="trade-button">{{'trade' | translate}}</button>
-        </td>
       </tr>
     </tbody>
   </table>

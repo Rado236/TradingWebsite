@@ -34,7 +34,7 @@
     "transaction_id":"Transaction id",
     "sender":"Sender",
     "reciever": "reciever",
-    "date":"date",
+    "date":"Date",
     "update_user_credentials": "Update user credentials",
     "username": "Username",
     "password": "Password",

@@ -17,8 +17,6 @@ content: "";
   z-index: 1;
 }
 
-
-
 .bg {
 position: relative;
 background-image: url(background.jpg);
@@ -30,11 +28,26 @@ justify-content: center;
 align-items: center;
 z-index: 0;
 animation: fadeInUp 2s ease-out forwards;
+flex-direction: row;
+display: flex;
+}
+
+video{
+  width: 100%;
+  height: auto;
+  border: 5px orange solid;
+  border-radius: 10px;
 }
 
 .bg h1,h3{
   animation: text 2s ease-in-out;
+  white-space: nowrap;
 }
+
+.bg-content:nth-child(2) {
+  width: 47%;
+}
+
 
 @keyframes text{
   from{
@@ -46,6 +59,7 @@ animation: fadeInUp 2s ease-out forwards;
     font-size: 100;
   }
 }
+
 
 @keyframes fadeInUp {
   0% {
@@ -86,6 +100,19 @@ animation: fadeInUp 2s ease-out forwards;
 @media (max-width: 1024px) {
   .bg {
     background-position: center top;
+    display: flex;
+    flex-direction: column;
+  }
+  .bg h1, h3{
+    white-space: normal ;
+  }
+
+  .bg-content:nth-child(2){
+      position: relative;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
   }
 
   .bg-content {
@@ -227,11 +254,10 @@ color: #666;
     align-items: center;
     max-width: 600px;
     overflow-x:auto;
-    animation: fadeInUp 2s ease-out forwards;
   }
   
   .crypto-table {
-    width: 85%;    
+    width: 45%;    
     margin:25px auto ;
     border-collapse: collapse;
   }
@@ -253,18 +279,5 @@ color: #666;
   
   .crypto-value {
     font-family: monospace;
-  }
-  
-  .trade-button {
-    color: #fff;
-    background-color: orange;
-    border-radius: 0.3em;
-    border: none;
-    padding: 5px 10px;
-    font-size: 14px;
-  }
-  
-  .trade-button:hover {
-    background-color: #DE8B4D;
   }
 

@@ -10,7 +10,6 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'crypto';
   wallets:Wallets[]=[];
   constructor(private authService:AuthService,private translateService:TranslateService){
     this.translateService.defaultLang='en';

@@ -1,4 +1,4 @@
-import { Component,Input,OnInit  } from '@angular/core';
+import { Component,EventEmitter,Input,OnInit, Output  } from '@angular/core';
 import { AuthService } from '../services/authenication.service';
 import { Wallets } from '../profile-page/profile-page.component';
 import { HttpClient } from '@angular/common/http';
@@ -13,6 +13,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 
 export class NavbarComponent implements OnInit{
+  @Output() languageChanged = new EventEmitter<string>();
   wallets:Wallets[]=[];
   public_address:string='';
   username:string='';
@@ -55,6 +56,7 @@ export class NavbarComponent implements OnInit{
     const selectedLang=lang.target.value;
     localStorage.setItem('lang',selectedLang);
     this.translateService.use(selectedLang);
+    this.languageChanged.emit(selectedLang);
   }
 
   //for mobile

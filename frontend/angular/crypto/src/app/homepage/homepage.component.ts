@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component,ElementRef,HostListener,Inject,OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../services/authenication.service';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 export interface Crypto{
   crypto_id:string,
@@ -14,6 +15,8 @@ export interface Crypto{
 })
 export class HomepageComponent implements OnInit, AfterViewInit{
   @ViewChild('statsSection') statSection!: ElementRef;
+  @ViewChild('tradeVideoEn') tradeVideoEn!: ElementRef<HTMLVideoElement>;
+  @ViewChild('tradeVideoBg') tradeVideoBg!: ElementRef<HTMLVideoElement>;
   cryptos:Crypto[] = []
   stat1=0;
   stat2=0;
@@ -23,6 +26,7 @@ export class HomepageComponent implements OnInit, AfterViewInit{
   private stat2target=100;
   private stat3target=110;
   private duration=2000;
+  lang:string | null = null;
   constructor(private http:HttpClient,public authService:AuthService){
 
 }
@@ -35,7 +39,9 @@ export class HomepageComponent implements OnInit, AfterViewInit{
   }
   
   ngOnInit() {
-    this.getCryptos()
+    this.lang = localStorage.getItem('lang') || 'en';
+    this.playVideo(this.lang);
+    this.getCryptos();
   }
 
   ngAfterViewInit(): void {
@@ -64,6 +70,19 @@ export class HomepageComponent implements OnInit, AfterViewInit{
       }
     };
     requestAnimationFrame(animate);
+  }
+
+  playVideo(language: string | null): void {
+    if (language === 'en' && this.tradeVideoEn) {
+      this.tradeVideoEn.nativeElement.play();
+    } else if (language === 'bg' && this.tradeVideoBg) {
+      this.tradeVideoBg.nativeElement.play();
+    }
+  }
+
+  onLanguageChange(newLang: string): void {
+    this.lang = newLang; // Update the language
+    this.playVideo(this.lang); // Play the video corresponding to the new language
   }
 }
   //   this.http.get<any>(`http://localhost:8080/api/price/${this.btc}`).subscribe(

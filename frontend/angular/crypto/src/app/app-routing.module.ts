@@ -13,15 +13,15 @@ import { AdminpanelComponent } from './adminpanel/adminpanel.component';
 import { AdminGuardGuard } from './services/admin-guard.guard';
 
 const routes: Routes = [
-  {path: "",component: HomepageComponent},
-  {path: "login",component: LoginComponent},
-  {path: "registration", component: RegistrationComponent},
-  {path: "profile", component: ProfilePageComponent,canActivate:[AuthGuardGuard]},
-  {path: "trading", component: TradingComponent,canActivate:[AuthGuardGuard]},
-  {path: "deposit", component: DepositComponent,canActivate:[AuthGuardGuard]},
-  {path: "sendcrypto", component: SendcryptoComponent,canActivate:[AuthGuardGuard]},
-  {path: "adminpanel", component: AdminpanelComponent,canActivate:[AdminGuardGuard]},
-  {path: "**", component: NotfoundComponent},
+  {path: "",component: HomepageComponent,title: "Homepage"},
+  {path: "login",component: LoginComponent,title: "Login"},
+  {path: "registration", component: RegistrationComponent,title: "Registration"},
+  {path: "profile", component: ProfilePageComponent,canActivate:[AuthGuardGuard],title: "Profile"},
+  {path: "trading", component: TradingComponent,canActivate:[AuthGuardGuard],title: "Trading"},
+  {path: "deposit", component: DepositComponent,canActivate:[AuthGuardGuard],title: "Deposit"},
+  {path: "sendcrypto", component: SendcryptoComponent,canActivate:[AuthGuardGuard],title: "Send crypto"},
+  {path: "adminpanel", component: AdminpanelComponent,canActivate:[AdminGuardGuard],title: "Admin panel"},
+  {path: "**", component: NotfoundComponent,title: "Not found"},
   
   
 ];
