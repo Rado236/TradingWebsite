@@ -36,8 +36,8 @@
     </div>
 
     <div class="trade-container">
-        <button [ngClass]="{'active' : isSentTransactionsView}" class="transactions-buttons" (click)="showSentTransactions()" type="button">{{'sent' | translate}}</button>
-        <button [ngClass]="{'active' : !isSentTransactionsView}" class="transactions-buttons" (click)="showRecievedTransactions()" type="button">{{'recieved' | translate}}</button>
+        <button [ngClass]="{'active' : isSentTransactionsView}" class="transactions-buttons" (click)="showSentTransactions()" type="button">{{'sent_crypto_transactions' | translate}}</button>
+        <button [ngClass]="{'active' : !isSentTransactionsView}" class="transactions-buttons" (click)="showRecievedTransactions()" type="button">{{'recieved_crypto_transactions' | translate}}</button>
         <h3>{{ (isSentTransactionsView ? 'sent_crypto_transactions' : 'recieved_crypto_transactions') | translate }}</h3>
       <h5 *ngIf="transactionsFilter.length == 0">No transactions yet</h5>
       <table *ngIf="transactionsFilter.length >= 1">
