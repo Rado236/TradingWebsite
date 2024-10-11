@@ -40,7 +40,7 @@ export class HomepageComponent implements OnInit, AfterViewInit{
   
   ngOnInit() {
     this.lang = localStorage.getItem('lang') || 'en';
-    this.playVideo(this.lang);
+    //this.playVideo(this.lang);
     this.getCryptos();
   }
 
@@ -73,16 +73,18 @@ export class HomepageComponent implements OnInit, AfterViewInit{
   }
 
   playVideo(language: string | null): void {
-    if (language === 'en' && this.tradeVideoEn) {
-      this.tradeVideoEn.nativeElement.play();
-    } else if (language === 'bg' && this.tradeVideoBg) {
-      this.tradeVideoBg.nativeElement.play();
-    }
+    setTimeout(() => {
+      if (language === 'en' && this.tradeVideoEn) {
+        this.tradeVideoEn.nativeElement.play();
+      } else if (language === 'bg' && this.tradeVideoBg) {
+        this.tradeVideoBg.nativeElement.play();
+      }
+    }, 2000);
   }
 
   onLanguageChange(newLang: string): void {
-    this.lang = newLang; // Update the language
-    this.playVideo(this.lang); // Play the video corresponding to the new language
+    this.lang = newLang; 
+    //this.playVideo(this.lang);
   }
 }
   //   this.http.get<any>(`http://localhost:8080/api/price/${this.btc}`).subscribe(

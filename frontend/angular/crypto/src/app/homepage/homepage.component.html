@@ -1,13 +1,13 @@
 <app-navbar (languageChanged)="onLanguageChange($event)"></app-navbar>
     <div class="bg">
         <div class="bg-content">
-            <h1>{{'get_ahead_in_the_crypto_game' | translate}}.</h1>
-            <h3>{{'trade_with_our_platform' | translate}}.</h3><br>
+            <h1 class="bg-content-text">{{'get_ahead_in_the_crypto_game' | translate}}.</h1>
+            <h3 class="bg-content-text">{{'trade_with_our_platform' | translate}}.</h3><br>
             <button class="logingbutton" routerLink="{{authService.isLoggedIn() ? '/trading' : '/registration' }}">{{'get_started' | translate}}</button>
         </div>
         <div class="bg-content">
-          <video *ngIf="lang=='en'" #tradeVideoEn src="assets/Kiopektrader_english.mp4" muted autoplay controls>Trade</video>
-          <video *ngIf="lang=='bg'" #tradeVideoBg src="assets/bulgarian_kiopektrader.mp4" muted autoplay controls>Trade</video>
+          <video *ngIf="lang=='en'" #tradeVideoEn src="assets/Kiopektrader_english.mp4" muted  controls>Trade</video>
+          <video *ngIf="lang=='bg'" #tradeVideoBg src="assets/bulgarian_kiopektrader.mp4" muted  controls>Trade</video>
       </div>
     </div>
 

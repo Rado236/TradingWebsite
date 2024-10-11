@@ -39,7 +39,7 @@ video{
   border-radius: 10px;
 }
 
-.bg h1,h3{
+.bg-content-text {
   animation: text 2s ease-in-out;
   white-space: nowrap;
 }
@@ -61,16 +61,7 @@ video{
 }
 
 
-@keyframes fadeInUp {
-  0% {
-      opacity: 0; /* Fully transparent */
-      transform: translateY(-20px); /* Move up */
-  }
-  100% {
-      opacity: 1; /* Fully opaque */
-      transform: translateY(0); /* Final position */
-  }
-}
+
 
 .logingbutton{
   background-color: orange;
@@ -97,6 +88,20 @@ z-index: 1;
 animation: fadeInUp 2s ease-out forwards;
 }
 
+@media(max-width: 1700px){
+  .bg{
+   display: flex;
+   flex-direction: column;
+}
+.bg-content:nth-child(2){
+  position: relative;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+}
+
 @media (max-width: 1024px) {
   .bg {
     background-position: center top;
@@ -107,13 +112,7 @@ animation: fadeInUp 2s ease-out forwards;
     white-space: normal ;
   }
 
-  .bg-content:nth-child(2){
-      position: relative;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-  }
+  
 
   .bg-content {
     padding: 4rem; /* Reduced padding for tablets */
@@ -281,3 +280,13 @@ color: #666;
     font-family: monospace;
   }
 
+  @keyframes fadeInUp {
+    0% {
+        opacity: 0; /* Fully transparent */
+        transform: translateY(-20px); /* Move up */
+    }
+    100% {
+        opacity: 1; /* Fully opaque */
+        transform: translateY(0); /* Final position */
+    }
+  }
