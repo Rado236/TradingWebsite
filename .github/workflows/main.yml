@@ -1,0 +1,8 @@
+name: Test
+on: workflow_run
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        run: echo Test
