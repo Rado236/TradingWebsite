@@ -14,6 +14,7 @@ jobs:
         run: |
           npm install
   build:
+    needs: deploy
     runs-on: ubuntu-latest
     steps:
       - name: Build angular
