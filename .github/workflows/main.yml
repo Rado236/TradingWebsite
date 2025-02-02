@@ -3,6 +3,9 @@ on: workflow_dispatch
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20]
     steps:
       - name: Get code
         uses: actions/checkout@v3
@@ -11,6 +14,7 @@ jobs:
         with:
           node-version: $
           cache: 'npm'
+          cache-dependency-path: package-lock.json
       - name: Install npm and angular packages
         run: |
           cd frontend/angular/crypto
