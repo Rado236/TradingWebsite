@@ -9,16 +9,18 @@ jobs:
       - name: Install nodejs
         uses: actions/setup-node@v3
         with:
-          node-version: 18.x
+          node-version: $
+          cache: 'npm'
       - name: Install npm and angular packages
         run: |
-          npm install
+          cd frontend/angular/crypto
+          npm ci
   build:
     needs: deploy
     runs-on: ubuntu-latest
     steps:
       - name: Build angular
-        run: ng build --prod
-      - name: Run angular
-        run: ng serve
+        run: |
+          cd frontend/angular/crypto
+          npm run build
           
